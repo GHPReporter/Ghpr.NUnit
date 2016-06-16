@@ -3,3 +3,11 @@
 
   build_script: 
     - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
+    
+  test:
+    assemblies:
+      - '**\*TestsExample.dll'
+      - '**\*TestsExample2.dll'
+    categories:
+      only:
+        - SuccessCategory
