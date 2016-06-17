@@ -3,3 +3,18 @@
 
   build_script: 
     - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
+
+  after_build:
+    - nuget pack "Ghpr.NUnit/Ghpr.NUnit.csproj" -Prop Configuration=Release
+
+  artifacts:
+    - path: '*.nupkg'
+      name: nupkg
+
+  deploy:
+    provider: NuGet
+    server: 
+    api_key:
+      secure: crLYbWXNgfrzYazkV18cEBRKnl90ee0wjWUfZGIDhkZcZg1ZlGbbsqRdr8JLmU3O
+    skip_symbols: false
+    artifact: nupkg
