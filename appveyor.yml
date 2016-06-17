@@ -4,7 +4,7 @@
   build_script: 
     - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
 
-    after_build:
+  after_build:
     - nuget pack "Ghpr.NUnit/Ghpr.NUnit.csproj" -Prop Configuration=Release
 
   artifacts:
