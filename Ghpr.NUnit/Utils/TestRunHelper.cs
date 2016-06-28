@@ -20,10 +20,13 @@ namespace Ghpr.NUnit.Utils
                 {
                     Name = testNode.GetAttribute("name") ?? "",
                     FullName = testNode.GetAttribute("fullname") ?? "",
-                    TestGuid = guid != null ? Guid.Parse(guid) : Guid.Empty,
+                    TestInfo = new ItemInfo
+                    {
+                        Guid = guid != null ? Guid.Parse(guid) : Guid.Empty,
+                        Start = testNode.GetAttribute("start-time", default(DateTime)),
+                        Finish = testNode.GetAttribute("end-time", default(DateTime))
+                    },
                     Result = r != null ? (l != null ? $"{r}: {l}" : r) : "Unknown",
-                    DateTimeStart = testNode.GetAttribute("start-time", default(DateTime)),
-                    DateTimeFinish = testNode.GetAttribute("end-time", default(DateTime)),
                     TestDuration = testNode.GetAttribute("duration", 0.0),
                     Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
                     TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
