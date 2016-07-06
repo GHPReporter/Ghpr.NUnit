@@ -12,6 +12,7 @@ namespace Ghpr.NUnit.Utils
         {
             try
             {
+                var now = DateTime.Now;
                 var guid = testNode.SelectSingleNode("properties/property[@name='TestGuid']")?.GetAttribute("value");
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
@@ -23,8 +24,8 @@ namespace Ghpr.NUnit.Utils
                     TestInfo = new ItemInfo
                     {
                         Guid = guid != null ? Guid.Parse(guid) : Guid.Empty,
-                        Start = testNode.GetAttribute("start-time", default(DateTime)),
-                        Finish = testNode.GetAttribute("end-time", default(DateTime))
+                        Start = testNode.GetAttribute("start-time", now),
+                        Finish = testNode.GetAttribute("end-time", now)
                     },
                     Result = r != null ? (l != null ? $"{r}: {l}" : r) : "Unknown",
                     TestDuration = testNode.GetAttribute("duration", 0.0),
