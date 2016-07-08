@@ -1,3 +1,8 @@
+-
+  branches:
+    only:
+    - nuget
+    
   before_build:
     - nuget restore Ghpr.NUnit/Ghpr.NUnit.sln
 
@@ -19,6 +24,25 @@
     skip_symbols: false
     artifact: nupkg
  
+  test:
+    assemblies:
+      - '**\*TestsExample.dll'
+      - '**\*TestsExample2.dll'
+    categories:
+      only:
+        - SuccessCategory
+        
+-
+  branches:
+    except:
+    - nuget
+    
+  before_build:
+    - nuget restore Ghpr.NUnit/Ghpr.NUnit.sln
+
+  build_script: 
+    - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
+
   test:
     assemblies:
       - '**\*TestsExample.dll'

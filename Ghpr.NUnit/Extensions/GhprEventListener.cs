@@ -1,8 +1,8 @@
 ﻿using Ghpr.Core;
 using Ghpr.NUnit.Utils;
+using NUnit;
 using NUnit.Engine;
 using NUnit.Engine.Extensibility;
-using NUnit.Engine.Internal;
 
 namespace Ghpr.NUnit.Extensions
 {
@@ -32,7 +32,6 @@ namespace Ghpr.NUnit.Extensions
                 case "test-case":
                     _reporter.TestFinished(TestRunHelper.GetTestRun(xmlNode));
                     break;
-                    
             }
         }
     }
