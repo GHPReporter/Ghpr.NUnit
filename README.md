@@ -3,3 +3,9 @@
 [![NuGet Version](https://img.shields.io/nuget/v/Ghpr.NUnit.svg)](https://www.nuget.org/packages/Ghpr.NUnit)
 
 # Ghpr.NUnit
+
+##Usage:
+ - Install NUnit 3
+ - Download the latest version of Ghpr.NUnit
+ - Add path to Ghpr.NUnit into nunit.engine.addins file
+ - Run your tests via NUnit Console
