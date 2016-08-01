@@ -15,7 +15,7 @@
 # Ghpr.NUnit
 
 ##Usage:
- - Install NUnit 3
+ - Install [NUnit 3](https://github.com/nunit/nunit/releases)
  - Download the latest version of Ghpr.NUnit
  - Add path to Ghpr.NUnit into nunit.engine.addins file
  - Run your tests via NUnit Console
