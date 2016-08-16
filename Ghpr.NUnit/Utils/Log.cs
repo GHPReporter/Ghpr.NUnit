@@ -6,7 +6,7 @@ namespace Ghpr.NUnit.Utils
     public static class Log
     {
         private const string LogFile = @"Ghpr.NUnit.Log.txt";
-        private static readonly string Output = @"C:\_GhprReport";
+        private const string Output = @"C:\_GhprReport";
 
         private static void WriteToFile(string msg, string fileName)
         {
@@ -78,15 +78,7 @@ namespace Ghpr.NUnit.Utils
             }
             WriteToFile(msg, "Exception_" + DateTime.Now.ToString("ddMMyyHHmmssfff") + ".txt");
         }
-
-        public static void Exception(Exception exception, string path, string exceptionMessage)
-        {
-            var msg = exceptionMessage + Environment.NewLine
-                + " Message: " + Environment.NewLine + exception.Message + Environment.NewLine +
-                "StackTrace: " + Environment.NewLine + exception.StackTrace;
-            WriteToFile(msg, "Exception_" + DateTime.Now.ToString("ddMMyyHHmmssfff") + ".txt", path);
-        }
-
+        
         public static void Warning(string warningMessage)
         {
             WriteToFile(warningMessage, "Warning_" + DateTime.Now.ToString("ddMMyyHHmmssfff") + ".txt");
