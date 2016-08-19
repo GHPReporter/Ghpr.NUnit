@@ -10,7 +10,7 @@ namespace Ghpr.NUnit.Extensions
     public class GhprEventListener : ITestEventListener
     {
         private readonly Reporter _reporter = new Reporter();
-        
+
         public void OnTestEvent(string report)
         {
             var xmlNode = XmlHelper.CreateXmlNode(report);
@@ -18,20 +18,32 @@ namespace Ghpr.NUnit.Extensions
             switch (xmlNode.Name)
             {
                 case "start-run":
+                {
                     _reporter.RunStarted();
                     break;
-                    
+                }
+
                 case "test-run":
+                {
                     _reporter.RunFinished();
                     break;
+                }
 
                 case "start-test":
+                {
                     _reporter.TestStarted(TestRunHelper.GetTestRun(xmlNode));
                     break;
-
+                }
                 case "test-case":
+                {
                     _reporter.TestFinished(TestRunHelper.GetTestRun(xmlNode));
                     break;
+                }
+                default:
+                {
+                    //Log.Warning($"Unknown XML Node! Node name: '{xmlNode.Name}'");
+                    break;
+                }
             }
         }
     }
