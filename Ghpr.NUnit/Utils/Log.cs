@@ -25,23 +25,6 @@ namespace Ghpr.NUnit.Utils
             }
         }
 
-        private static void WriteToFile(string msg, string fileName, string filePath)
-        {
-            Directory.CreateDirectory(Output);
-            using (var sw = File.AppendText(Path.Combine(filePath, fileName)))
-            {
-                try
-                {
-                    var logLine = $"{DateTime.Now:G}: {msg}";
-                    sw.WriteLine(logLine);
-                }
-                finally
-                {
-                    sw.Close();
-                }
-            }
-        }
-
         public static void Write(string msg)
         {
             Directory.CreateDirectory(Output);

@@ -20,17 +20,17 @@ namespace Ghpr.NUnit.Utils
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>().Select(n => n.GetAttribute("value")).ToArray();
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
-
+                var ti = new ItemInfo
+                {
+                    Guid = guid != null ? Guid.Parse(guid) : Guid.Empty,
+                    Start = testNode.GetAttribute("start-time", now),
+                    Finish = testNode.GetAttribute("end-time", now)
+                };
                 var test = new TestRun
                 {
                     Name = testNode.GetAttribute("name") ?? "",
                     FullName = testNode.GetAttribute("fullname") ?? "",
-                    TestInfo = new ItemInfo
-                    {
-                        Guid = guid != null ? Guid.Parse(guid) : Guid.Empty,
-                        Start = testNode.GetAttribute("start-time", now),
-                        Finish = testNode.GetAttribute("end-time", now)
-                    },
+                    TestInfo = ti,
                     TestType = testType,
                     Priority = priority,
                     Categories = categories,
@@ -40,7 +40,6 @@ namespace Ghpr.NUnit.Utils
                     TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
                     TestStackTrace = testNode.SelectSingleNode(".//stack-trace")?.InnerText ?? ""
                 };
-
                 return test;
             }
             catch (Exception ex)
