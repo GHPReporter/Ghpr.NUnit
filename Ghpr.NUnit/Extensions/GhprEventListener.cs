@@ -22,13 +22,11 @@ namespace Ghpr.NUnit.Extensions
                     _reporter.RunStarted();
                     break;
                 }
-
                 case "test-run":
                 {
                     _reporter.RunFinished();
                     break;
                 }
-
                 case "start-test":
                 {
                     _reporter.TestStarted(TestRunHelper.GetTestRun(xmlNode));
