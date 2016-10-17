@@ -20,6 +20,6 @@
  - Install [NUnit 3](https://github.com/nunit/nunit/releases)
  - Download the latest version of Ghpr.NUnit (use NuGet for this step)
  - Put Cghp.Core.dll, Ghpr.Core.dll.config, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
-<nunit_location>/nunit-console/addins
+[nunit_location]/nunit-console/addins
  - Add path to Ghpr.NUnit into nunit.engine.addins file
  - Run your tests via NUnit Console
