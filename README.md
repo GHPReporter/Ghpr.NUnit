@@ -3,8 +3,9 @@
   <br><br>
   <b>Some Links:</b><br>
   <a href="https://github.com/GHPReporter/Ghpr.Core">Core</a> |
-  <a href="https://github.com/GHPReporter/Ghpr.NUnit">NUnit</a> |
   <a href="https://github.com/GHPReporter/Ghpr.MSTest">MSTest</a> |
+  <a href="https://github.com/GHPReporter/Ghpr.NUnit">NUnit</a> |
+  <a href="https://github.com/GHPReporter/Ghpr.SpecFlow">SpecFlow</a> |
   <a href="https://github.com/GHPReporter/Ghpr.Console">Console</a> |
   <a href="https://github.com/GHPReporter/GHPReporter.github.io/">Site Repo</a>
 </p>
@@ -17,6 +18,8 @@
 
 ##Usage:
  - Install [NUnit 3](https://github.com/nunit/nunit/releases)
- - Download the latest version of Ghpr.NUnit
+ - Download the latest version of Ghpr.NUnit (use NuGet for this step)
+ - Put Ghpr.Core.dll, Ghpr.Core.dll.config, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
+[nunit_location]/nunit-console/addins
  - Add path to Ghpr.NUnit into nunit.engine.addins file
  - Run your tests via NUnit Console
