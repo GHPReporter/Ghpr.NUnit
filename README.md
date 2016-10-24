@@ -17,7 +17,7 @@
 # Ghpr.NUnit
 
 ##Usage:
- - Install [NUnit 3](https://github.com/nunit/nunit/releases)
+ - Install [NUnit 3](https://github.com/nunit/nunit/releases) latest release
  - Download the latest version of Ghpr.NUnit (use NuGet for this step)
  - Put Ghpr.Core.dll, Ghpr.Core.dll.config, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
 [nunit_location]/nunit-console/addins
