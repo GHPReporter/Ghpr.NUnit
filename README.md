@@ -20,7 +20,7 @@
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
  - Put Ghpr.Core.dll, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
-[nunit_location]/nunit-console/addins
+[nunit_console_location]/nunit-console/addins
  - Add path to Ghpr.NUnit into nunit.engine.addins file
  - Add config data to nunit3-console.exe.config:
  
