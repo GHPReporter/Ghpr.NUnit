@@ -3,6 +3,7 @@ using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Interfaces;
+using Ghpr.NUnit.Extensions;
 using NUnit;
 
 namespace Ghpr.NUnit.Utils
@@ -44,7 +45,8 @@ namespace Ghpr.NUnit.Utils
             }
             catch (Exception ex)
             {
-                Core.Utils.Log.Exception(ex, "Exception in GetTestRun");
+                var log = new Core.Utils.Log(GhprEventListener.Settings.OutputPath);
+                log.Exception(ex, "Exception in GetTestRun");
                 return new TestRun();
             }
         }

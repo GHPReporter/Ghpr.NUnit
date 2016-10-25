@@ -9,7 +9,13 @@ namespace Ghpr.NUnit.Extensions
     [Extension(Path = "/NUnit/Engine/TypeExtensions/ITestEventListener")]
     public class GhprEventListener : ITestEventListener
     {
-        private readonly Reporter _reporter = new Reporter();
+        public GhprEventListener()
+        {
+            _reporter = new Reporter(Settings);
+        }
+
+        private readonly Reporter _reporter;
+        public static Settings Settings => new Settings();
 
         public void OnTestEvent(string report)
         {
