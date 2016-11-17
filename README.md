@@ -35,3 +35,20 @@
   </appSettings> 
  ``` 
  - Run your tests via NUnit Console
+
+
+## Demo Report
+
+You can view [Demo report](http://ghpreporter.github.io/report/) on our [site](http://ghpreporter.github.io/)
+
+## View report locally
+
+####Firefox
+
+ - Go to `about:config`
+ - Find `security.fileuri.strict_origin_policy` parameter
+ - Set it to `false`
+
+## Contributing
+
+Anyone contributing is welcome. Write [issues](https://github.com/GHPReporter/Ghpr.NUnit/issues), create [pull requests](https://github.com/GHPReporter/Ghpr.NUnit/pulls).
