@@ -21,7 +21,7 @@
  - Download the latest version of Ghpr.NUnit (using NuGet)
  - Put Ghpr.Core.dll, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
 [nunit_console_location]/nunit-console/addins
- - Add path to Ghpr.NUnit into nunit.engine.addins file
+ - Add path **addins/Ghpr.NUnit.dll** to Ghpr.NUnit into nunit.engine.addins file
  - Add config data to nunit3-console.exe.config:
  
  ``` 
