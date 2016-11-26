@@ -17,9 +17,38 @@
 # Ghpr.NUnit
 
 ##Usage:
- - Install [NUnit 3](https://github.com/nunit/nunit/releases) latest release
- - Download the latest version of Ghpr.NUnit (use NuGet for this step)
- - Put Ghpr.Core.dll, Ghpr.Core.dll.config, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
-[nunit_location]/nunit-console/addins
- - Add path to Ghpr.NUnit into nunit.engine.addins file
+ - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
+ - Download the latest version of Ghpr.NUnit (using NuGet)
+ - Put Ghpr.Core.dll, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
+[nunit_console_location]/nunit-console/addins
+ - Add path **addins/Ghpr.NUnit.dll** into nunit.engine.addins file
+ - Add config data to nunit3-console.exe.config:
+ 
+ ``` 
+ <appSettings>
+    <add key="OutputPath" value="C:\_GHPReportOutput" />
+    <add key="TakeScreenshotAfterFail" value="True" />
+    <add key="Sprint" value="" />
+    <add key="RunName" value="" />
+    <add key="RunGuid" value="" />
+    <add key="RealTimeGeneration" value="True" />
+  </appSettings> 
+ ``` 
  - Run your tests via NUnit Console
+
+
+## Demo Report
+
+You can view [Demo report](http://ghpreporter.github.io/report/) on our [site](http://ghpreporter.github.io/)
+
+## View report locally
+
+####Firefox
+
+ - Go to `about:config`
+ - Find `security.fileuri.strict_origin_policy` parameter
+ - Set it to `false`
+
+## Contributing
+
+Anyone contributing is welcome. Write [issues](https://github.com/GHPReporter/Ghpr.NUnit/issues), create [pull requests](https://github.com/GHPReporter/Ghpr.NUnit/pulls).
