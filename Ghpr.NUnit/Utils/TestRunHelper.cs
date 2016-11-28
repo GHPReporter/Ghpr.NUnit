@@ -22,14 +22,15 @@ namespace Ghpr.NUnit.Utils
             return $"{ScreenNameTemplate}{count}";
         }
 
-        public static void SaveScreenshot(byte[] screenBytes)
+        public static void SaveScreenshot(byte[] screenBytes, string outputPath = "")
         {
             var guid = TestContext.CurrentContext.Test.Properties.Get("TestGuid")?.ToString();
             var fullName = TestContext.CurrentContext.Test.FullName;
 
             var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
 
-            var screenshotName = Taker.SaveScreenshot(Path.Combine(GhprEventListener.Settings.OutputPath, 
+            var screenshotName = Taker.SaveScreenshot(
+                Path.Combine(outputPath.Equals("") ? GhprEventListener.Settings.OutputPath : outputPath, 
                 Reporter.TestsFolderName, testGuid.ToString(), Reporter.ImgFolderName), screenBytes, DateTime.Now);
 
             var count = 0;
