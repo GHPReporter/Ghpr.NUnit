@@ -15,35 +15,7 @@ namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
-        private const string ScreenNameTemplate = "ghpr_screenshot_";
 
-        private static string GetScreenKey(int count)
-        {
-            return $"{ScreenNameTemplate}{count}";
-        }
-
-        public static void SaveScreenshot(byte[] screenBytes, string outputPath = "")
-        {
-            var guid = TestContext.CurrentContext.Test.Properties.Get("TestGuid")?.ToString();
-            var fullName = TestContext.CurrentContext.Test.FullName;
-
-            var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
-
-            var screenshotName = Taker.SaveScreenshot(
-                Path.Combine(outputPath.Equals("") ? GhprEventListener.Settings.OutputPath : outputPath, 
-                Reporter.TestsFolderName, testGuid.ToString(), Reporter.ImgFolderName), screenBytes, DateTime.Now);
-
-            var count = 0;
-            var screenKey = GetScreenKey(count);
-            while (TestContext.CurrentContext.Test.Properties.Get(screenKey) != null)
-            {
-                count++;
-                screenKey = GetScreenKey(count);
-            }
-
-            TestContext.CurrentContext.Test.Properties.Add(screenKey, screenshotName);
-        }
-        
         public static ITestRun GetTestRun(XmlNode testNode)
         {
             try
@@ -55,7 +27,8 @@ namespace Ghpr.NUnit.Utils
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
 
-                var screenNames = testNode.SelectNodes($"properties/property[contains(@name,'{ScreenNameTemplate}')]")?
+                var screenNames = testNode.SelectNodes(
+                        $"properties/property[contains(@name,'{ScreenHelper.ScreenNameTemplate}')]")?
                     .Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
 
