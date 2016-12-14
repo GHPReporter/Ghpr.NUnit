@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace Ghpr.NUnit.Utils
 {
-    public class ScreenHelper
+    public static class ScreenHelper
     {
         internal const string ScreenNameTemplate = "ghpr_screenshot_";
 
