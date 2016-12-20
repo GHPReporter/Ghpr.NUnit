@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Ghpr.Core;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Extensions;
 using NUnit.Framework;
@@ -23,9 +22,9 @@ namespace Ghpr.NUnit.Utils
 
             var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
 
-            var screenshotName = Taker.SaveScreenshot(
+            var screenshotName = ScreenshotHelper.SaveScreenshot(
                 Path.Combine(outputPath.Equals("") ? GhprEventListener.Settings.OutputPath : outputPath,
-                Reporter.TestsFolderName, testGuid.ToString(), Reporter.ImgFolderName), screenBytes, DateTime.Now);
+                Names.TestsFolderName, testGuid.ToString(), Names.ImgFolderName), screenBytes, DateTime.Now);
 
             var count = 0;
             var screenKey = GetScreenKey(count);
