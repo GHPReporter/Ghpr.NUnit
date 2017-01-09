@@ -6,7 +6,7 @@ using NUnit.Engine.Extensibility;
 
 namespace Ghpr.NUnit.Extensions
 {
-    [Extension(Description = "Test Reporter Extension", EngineVersion = "3.4")]
+    [Extension(Description = "Test Reporter Extension", EngineVersion = "3.5")]
     public class GhprEventListener : ITestEventListener
     {
         public GhprEventListener()
