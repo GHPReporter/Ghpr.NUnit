@@ -17,6 +17,8 @@
 # Ghpr.NUnit
 
 ##Usage:
+Please use this project with targetFramework v4.5.2
+
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
  - Put Ghpr.Core.dll, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
