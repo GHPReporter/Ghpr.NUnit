@@ -37,6 +37,7 @@
  - Run your tests via NUnit Console
 
 ## How to publish the report in Jenkins
+
  - In the configuration of your job, in the "Post-build actions", you just have to add a "Publish HTML reports" with the correct informations.
  
 Known Issues : 
@@ -46,6 +47,10 @@ Known Issues :
 ...
 
  - The screenshots generated with Selenium works only when there were made with browsers like Firefox or Chrome (Doesn't work with IE) 
+ 
+## How to work with screenshots
+
+TODO
  
 ## Demo Report
 
