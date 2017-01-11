@@ -63,7 +63,7 @@ namespace Ghpr.NUnit.Utils
             }
             catch (Exception ex)
             {
-                var log = new Core.Utils.Log(GhprEventListener.Settings.OutputPath);
+                var log = new Core.Utils.Log(GhprEventListener.OutputPath);
                 log.Exception(ex, "Exception in GetTestRun");
                 return new TestRun();
             }

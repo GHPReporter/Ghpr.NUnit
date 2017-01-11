@@ -6,16 +6,16 @@ using NUnit.Engine.Extensibility;
 
 namespace Ghpr.NUnit.Extensions
 {
-    [Extension(Description = "Test Reporter Extension", EngineVersion = "3.4")]
+    [Extension(Description = "Test Reporter Extension", EngineVersion = "3.5")]
     public class GhprEventListener : ITestEventListener
     {
         public GhprEventListener()
         {
-            _reporter = new Reporter(Settings);
+            _reporter = new Reporter();
         }
         
-        private readonly Reporter _reporter;
-        public static Settings Settings => new Settings();
+        private static Reporter _reporter;
+        public static string OutputPath => _reporter.OutputPath;
 
         public void OnTestEvent(string report)
         {

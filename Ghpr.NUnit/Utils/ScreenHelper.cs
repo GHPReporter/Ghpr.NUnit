@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Ghpr.Core.Helpers;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Extensions;
 using NUnit.Framework;
@@ -15,16 +16,14 @@ namespace Ghpr.NUnit.Utils
             return $"{ScreenNameTemplate}{count}";
         }
 
-        public static void SaveScreenshot(byte[] screenBytes, string outputPath = "")
+        public static void SaveScreenshot(byte[] screenBytes)
         {
             var guid = TestContext.CurrentContext.Test.Properties.Get("TestGuid")?.ToString();
             var fullName = TestContext.CurrentContext.Test.FullName;
 
             var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
-
-            var screenshotName = ScreenshotHelper.SaveScreenshot(
-                Path.Combine(outputPath.Equals("") ? GhprEventListener.Settings.OutputPath : outputPath,
-                Names.TestsFolderName, testGuid.ToString(), Names.ImgFolderName), screenBytes, DateTime.Now);
+            var fullPath = Path.Combine(GhprEventListener.OutputPath, Names.TestsFolderName, testGuid.ToString(), Names.ImgFolderName);
+            var screenshotName = ScreenshotHelper.SaveScreenshot(fullPath, screenBytes, DateTime.Now);
 
             var count = 0;
             var screenKey = GetScreenKey(count);
