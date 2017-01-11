@@ -11,11 +11,11 @@ namespace Ghpr.NUnit.Extensions
     {
         public GhprEventListener()
         {
-            _reporter = new Reporter(Settings);
+            _reporter = new Reporter();
         }
         
-        private readonly Reporter _reporter;
-        public static Settings Settings => new Settings();
+        private static Reporter _reporter;
+        public static string OutputPath => _reporter.OutputPath;
 
         public void OnTestEvent(string report)
         {
