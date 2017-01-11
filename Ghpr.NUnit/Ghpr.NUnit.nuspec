@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Easy-to-use test run reporter for NUnit 3</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright Evgeniy Kosjakov © 2016</copyright>
+    <copyright>Copyright Evgeniy Kosjakov © 2016-2017</copyright>
     <tags>.NET package HTML report reporting tool</tags>
   </metadata>
   <!--<files>
