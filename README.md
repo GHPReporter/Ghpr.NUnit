@@ -48,7 +48,7 @@ Known Issues :
  <arguments>-Xrs -Xmx256m -Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle "-Dhudson.model.DirectoryBrowserSupport.CSP=" -jar -Dmail.smtp.starttls.enable=true "%BASE%\jenkins.war" --httpPort=8080 --webroot="%BASE%\war"</arguments>
 ...
 
- - The screenshots generated with Selenium works only when there were made with browsers like Firefox or Chrome (Doesn't work with IE) 
+ - The screenshots generated with Selenium work only when there were made with browsers like Firefox or Chrome (Doesn't work with IE) 
  
 ## How to work with screenshots
 
