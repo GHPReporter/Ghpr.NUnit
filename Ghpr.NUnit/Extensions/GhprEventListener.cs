@@ -1,6 +1,5 @@
 ﻿using Ghpr.Core;
 using Ghpr.Core.Enums;
-using Ghpr.Core.Interfaces;
 using Ghpr.NUnit.Utils;
 using NUnit;
 using NUnit.Engine;
