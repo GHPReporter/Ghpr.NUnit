@@ -7,7 +7,7 @@ using NUnit.Engine.Extensibility;
 
 namespace Ghpr.NUnit.Extensions
 {
-    [Extension(Description = "Test Reporter Extension")]
+    [Extension(Description = "Ghpr NUnit Extension")]
     public class GhprEventListener : ITestEventListener
     {
         static GhprEventListener()
