@@ -1,4 +1,5 @@
 ﻿using Ghpr.Core;
+using Ghpr.Core.Enums;
 using Ghpr.NUnit.Utils;
 using NUnit;
 using NUnit.Engine;
@@ -6,16 +7,16 @@ using NUnit.Engine.Extensibility;
 
 namespace Ghpr.NUnit.Extensions
 {
-    [Extension(Description = "Test Reporter Extension", EngineVersion = "3.5")]
+    [Extension(Description = "Ghpr NUnit Extension")]
     public class GhprEventListener : ITestEventListener
     {
-        public GhprEventListener()
+        static GhprEventListener()
         {
-            _reporter = new Reporter();
+            Reporter = new Reporter(TestingFramework.NUnit);
         }
         
-        private static Reporter _reporter;
-        public static string OutputPath => _reporter.OutputPath;
+        private static readonly Reporter Reporter;
+        public static string OutputPath => Reporter.Settings.OutputPath;
 
         public void OnTestEvent(string report)
         {
@@ -25,22 +26,22 @@ namespace Ghpr.NUnit.Extensions
             {
                 case "start-run":
                 {
-                    _reporter.RunStarted();
+                    Reporter.RunStarted();
                     break;
                 }
                 case "test-run":
                 {
-                    _reporter.RunFinished();
+                    Reporter.RunFinished();
                     break;
                 }
                 case "start-test":
                 {
-                    _reporter.TestStarted(TestRunHelper.GetTestRun(xmlNode));
+                    Reporter.TestStarted(TestRunHelper.GetTestRun(xmlNode));
                     break;
                 }
                 case "test-case":
                 {
-                    _reporter.TestFinished(TestRunHelper.GetTestRun(xmlNode));
+                    Reporter.TestFinished(TestRunHelper.GetTestRun(xmlNode));
                     break;
                 }
                 default:
