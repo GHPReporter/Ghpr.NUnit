@@ -13,10 +13,10 @@
     <description>Easy-to-use test run reporter for NUnit 3</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright Evgeniy Kosjakov © 2016-2017</copyright>
-    <tags>.NET package HTML report reporting tool</tags>
+    <tags>.NET package HTML report reporting tool NUnit</tags>
   </metadata>
-  <!--<files>
+  <files>
     <file src="bin\Release\Ghpr.NUnit.dll" target="lib" />
-    <file src="bin\Release\Ghpr.NUnit.dll.config" target="lib" />
-  </files>-->
+    <file src="bin\Release\Ghpr.NUnit.Settings.json" target="content" />
+  </files>
 </package>

@@ -9,7 +9,6 @@ using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Extensions;
 using NUnit;
-using NUnit.Framework;
 
 namespace Ghpr.NUnit.Utils
 {
