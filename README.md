@@ -44,7 +44,17 @@ Please, read [this](https://github.com/GHPReporter/Ghpr.Core#how-to-publish-the-
 
 ## How to work with screenshots
 
-TODO
+If you want to add screenshots to your report, you need to implement your own method of taking screenshot as `byte[]`. This is needed because there is no way to take screenshot which will work on any testing framework or CI tool (such as Jenkins or TeamCity). If you are using WebDriver, you can take screenshot using WebDriver.
+
+```csharp
+[Test]
+public void TestMethod()
+{
+    var bytes = TakeScreenshot(); //your implementation
+    //all you need to do is to pass byte[] to ScreenHelper:
+    ScreenHelper.SaveScreenshot(bytes);
+}
+```
  
 ## Demo Report
 
