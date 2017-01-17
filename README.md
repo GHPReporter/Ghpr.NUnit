@@ -16,7 +16,7 @@
 
 # Ghpr.NUnit
 
-##Usage:
+## Usage:
 Please use this project with targetFramework v4.5.2
 
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
@@ -25,6 +25,8 @@ Please use this project with targetFramework v4.5.2
 [nunit_console_location]/nunit-console/addins
  - Add path **addins/Ghpr.NUnit.dll** into nunit.engine.addins file
  - Run your tests via NUnit Console
+ 
+ **NOTE:** If you are going to take screenshots inside yout tests, then make sure that you have the same `Ghpr.NUnit.Settings.json` file inside your C# project and inside NUnit.Console addins folder.
 
 ## How to publish the report in Jenkins
 
