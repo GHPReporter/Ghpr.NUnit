@@ -21,21 +21,9 @@ Please use this project with targetFramework v4.5.2
 
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
- - Put Ghpr.Core.dll, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
+ - Put Ghpr.Core.dll, Ghpr.NUnit.dll, Ghpr.NUnit.Settings.json and Newtonsoft.Json.dll to the following folder: 
 [nunit_console_location]/nunit-console/addins
  - Add path **addins/Ghpr.NUnit.dll** into nunit.engine.addins file
- - Add config data to nunit3-console.exe.config:
- 
- ``` 
- <appSettings>
-    <add key="OutputPath" value="C:\_GHPReportOutput" />
-    <add key="TakeScreenshotAfterFail" value="True" />
-    <add key="Sprint" value="" />
-    <add key="RunName" value="" />
-    <add key="RunGuid" value="" />
-    <add key="RealTimeGeneration" value="True" />
-  </appSettings> 
- ``` 
  - Run your tests via NUnit Console
 
 ## How to publish the report in Jenkins
