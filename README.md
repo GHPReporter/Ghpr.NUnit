@@ -43,7 +43,20 @@ public void TestMethod()
     ScreenHelper.SaveScreenshot(bytes);
 }
 ```
- 
+If you want to be able to take screenshots for failed tests, you can take a look at this approach:
+
+```csharp
+[TearDown]
+public void TakeScreenIfFailed()
+{
+    var res = TestContext.CurrentContext.Result.Outcome;
+    if (res.Equals(ResultState.Failure) || res.Equals(ResultState.Error))
+    {
+        ScreenHelper.SaveScreenshot(TakeScreenshot());
+    }
+}
+```
+
 ## Demo Report
 
 You can view [Demo report](http://ghpreporter.github.io/report/) on our [site](http://ghpreporter.github.io/)
