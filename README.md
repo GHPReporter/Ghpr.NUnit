@@ -22,8 +22,8 @@ Please use this project with targetFramework v4.5.2
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
  - Put `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll` to the following folder: 
-[nunit_console_location]/nunit-console/addins
- - Add path **addins/Ghpr.NUnit.dll** into nunit.engine.addins file
+*[nunit_console_location]/nunit-console/addins*
+ - Add path **addins/Ghpr.NUnit.dll** into `nunit.engine.addins` file
  - Run your tests via NUnit Console
  
  **NOTE:** If you are going to take screenshots inside yout tests, then make sure that you have the same `Ghpr.NUnit.Settings.json` file inside your C# project and inside NUnit.Console addins folder.
