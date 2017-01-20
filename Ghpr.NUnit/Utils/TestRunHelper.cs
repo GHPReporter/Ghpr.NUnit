@@ -27,7 +27,7 @@ namespace Ghpr.NUnit.Utils
                     .Select(n => n.GetAttribute("value")).ToArray();
 
                 var screenNames = testNode.SelectNodes(
-                        $"properties/property[contains(@name,'{ScreenHelper.ScreenNameTemplate}')]")?
+                        $"properties/property[contains(@name,'{ScreenHelper.ScreenKeyTemplate}')]")?
                     .Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
 

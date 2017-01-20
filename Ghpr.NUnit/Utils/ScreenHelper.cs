@@ -9,11 +9,11 @@ namespace Ghpr.NUnit.Utils
 {
     public static class ScreenHelper
     {
-        internal const string ScreenNameTemplate = "ghpr_screenshot_";
+        internal const string ScreenKeyTemplate = "ghpr_screenshot_";
 
         private static string GetScreenKey(int count)
         {
-            return $"{ScreenNameTemplate}{count}";
+            return $"{ScreenKeyTemplate}{count}";
         }
 
         public static void SaveScreenshot(byte[] screenBytes)
