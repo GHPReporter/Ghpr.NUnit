@@ -16,44 +16,49 @@
 
 # Ghpr.NUnit
 
-##Usage:
+## Usage:
 Please use this project with targetFramework v4.5.2
 
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
- - Put Ghpr.Core.dll, Ghpr.NUnit.dll and Newtonsoft.Json.dll to the following folder: 
-[nunit_console_location]/nunit-console/addins
- - Add path **addins/Ghpr.NUnit.dll** into nunit.engine.addins file
- - Add config data to nunit3-console.exe.config:
- 
- ``` 
- <appSettings>
-    <add key="OutputPath" value="C:\_GHPReportOutput" />
-    <add key="TakeScreenshotAfterFail" value="True" />
-    <add key="Sprint" value="" />
-    <add key="RunName" value="" />
-    <add key="RunGuid" value="" />
-    <add key="RealTimeGeneration" value="True" />
-  </appSettings> 
- ``` 
+ - Put `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll` to the following folder: 
+*[nunit_console_location]/nunit-console/addins*
+ - Add path **addins/Ghpr.NUnit.dll** into `nunit.engine.addins` file
  - Run your tests via NUnit Console
+ 
+ **NOTE:** If you are going to take screenshots inside yout tests, then make sure that you have the same `Ghpr.NUnit.Settings.json` file inside your C# project and inside NUnit.Console addins folder.
 
 ## How to publish the report in Jenkins
 
- - In the configuration of your job, in the "Post-build actions", you just have to add a "Publish HTML reports" with the correct informations.
- 
-Known Issues : 
- - Due to the CSP (Content Security Policy), the report used for the functionals tests is not viewable on Jenkins with the default value defined for the CSP. So, for solving this issue, the CSP is automatically forced after each restart with a specific value. For that, a line is added in the C:\Program Files (x86)\Jenkins\jenkins.xml file, like this :
-... 
- <arguments>-Xrs -Xmx256m -Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle "-Dhudson.model.DirectoryBrowserSupport.CSP=" -jar -Dmail.smtp.starttls.enable=true "%BASE%\jenkins.war" --httpPort=8080 --webroot="%BASE%\war"</arguments>
-...
+Please, read [this](https://github.com/GHPReporter/Ghpr.Core#how-to-publish-the-report-in-jenkins) `'How to publish the report in Jenkins'` instruction.
 
- - The screenshots generated with Selenium work only when there were made with browsers like Firefox or Chrome (Doesn't work with IE) 
- 
 ## How to work with screenshots
 
-TODO
- 
+If you want to add screenshots to your report, you need to implement your own method of taking screenshot as `byte[]`. This is needed because there is no way to take screenshot which will work on any testing framework or CI tool (such as Jenkins or TeamCity). If you are using WebDriver, you can take screenshot using WebDriver.
+
+```csharp
+[Test]
+public void TestMethod()
+{
+    var bytes = TakeScreenshot(); //your implementation
+    //all you need to do is to pass byte[] to ScreenHelper:
+    ScreenHelper.SaveScreenshot(bytes);
+}
+```
+If you want to be able to take screenshots for failed tests, you can take a look at this approach:
+
+```csharp
+[TearDown]
+public void TakeScreenIfFailed()
+{
+    var res = TestContext.CurrentContext.Result.Outcome;
+    if (res.Equals(ResultState.Failure) || res.Equals(ResultState.Error))
+    {
+        ScreenHelper.SaveScreenshot(TakeScreenshot());
+    }
+}
+```
+
 ## Demo Report
 
 You can view [Demo report](http://ghpreporter.github.io/report/) on our [site](http://ghpreporter.github.io/)
