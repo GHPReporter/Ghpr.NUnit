@@ -65,11 +65,7 @@ You can view [Demo report](http://ghpreporter.github.io/report/) on our [site](h
 
 ## View report locally
 
-####Firefox
-
- - Go to `about:config`
- - Find `security.fileuri.strict_origin_policy` parameter
- - Set it to `false`
+Please read [Core instructions](https://github.com/GHPReporter/Ghpr.Core#view-report-locally)
 
 ## Contributing
 

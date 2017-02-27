@@ -21,7 +21,7 @@ namespace Ghpr.NUnit.Utils
             var guid = TestContext.CurrentContext.Test.Properties.Get("TestGuid")?.ToString();
             var fullName = TestContext.CurrentContext.Test.FullName;
             var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
-            var fullPath = Path.Combine(GhprEventListener.OutputPath, Names.TestsFolderName, testGuid.ToString(), Names.ImgFolderName);
+            var fullPath = Path.Combine(GhprEventListener.OutputPath, Paths.Folders.Tests, testGuid.ToString(), Paths.Folders.Img);
             var screenshotName = ScreenshotHelper.SaveScreenshot(fullPath, screenBytes, DateTime.Now);
             var count = 0;
             var screenKey = GetScreenKey(count);
