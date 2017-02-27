@@ -1,7 +1,9 @@
 ﻿{
-  "outputPath": "C:\\_GHPReportOutput",
-  "sprint": "",
-  "runName": "",
-  "runGuid": "",
-  "realTimeGeneration": "True"
+	"outputPath":"C:\\_GHPReporter_Core_Report",
+	"sprint":"",
+	"runName":"",
+	"runGuid":"",
+  "realTimeGeneration": "True",
+  "runsToDisplay": "5",
+  "testsToDisplay": "5"  
 }
