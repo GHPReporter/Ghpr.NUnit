@@ -14,6 +14,11 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright Evgeniy Kosjakov © 2016-2017</copyright>
     <tags>.NET package HTML report reporting tool NUnit</tags>
+    <dependencies>
+      <dependency id="Ghpr.Core" version="0.4.5.5" />
+      <dependency id="NUnit" version="3.6.1" />
+      <dependency id="NUnit.Engine" version="3.6.1" />
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\Release\Ghpr.NUnit.dll" target="lib" />
