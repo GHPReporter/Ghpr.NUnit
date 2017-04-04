@@ -65,7 +65,7 @@ You can view [Demo report](http://ghpreporter.github.io/report/) on our [site](h
 
 ## View report locally
 
-Please read [Core instructions](https://github.com/GHPReporter/Ghpr.Core#view-report-locally)
+Please read [Core instructions](https://github.com/GHPReporter/Ghpr.Core#view-report-locally) or [this comment](https://github.com/GHPReporter/Ghpr.NUnit/issues/16#issuecomment-291445978) about opening report in Chrome
 
 ## Contributing
 
