@@ -1,5 +1,6 @@
 ﻿using Ghpr.Core;
 using Ghpr.Core.Enums;
+using Ghpr.Core.Utils;
 using Ghpr.NUnit.Utils;
 using NUnit;
 using NUnit.Engine;
@@ -13,6 +14,7 @@ namespace Ghpr.NUnit.Extensions
         static GhprEventListener()
         {
             Reporter = new Reporter(TestingFramework.NUnit);
+            StaticLog.Initialize(Reporter.Settings.OutputPath);
         }
         
         private static readonly Reporter Reporter;
