@@ -36,7 +36,21 @@ namespace Ghpr.NUnit.Utils
 
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
+
                 var fullName = testNode.GetAttribute("fullname");
+                var name = testNode.GetAttribute("name");
+                if (fullName.Contains(name))
+                {
+                    var ns = fullName.Substring(0, fullName.LastIndexOf(name, StringComparison.Ordinal) - 1);
+                    if (ns.Contains("(") && ns.Contains(")"))
+                    {
+                        var i1 = ns.IndexOf("(", StringComparison.Ordinal);
+                        var i2 = ns.IndexOf(")", StringComparison.Ordinal);
+                        ns = ns.Substring(0, i1) + ns.Substring(i2 + 1);
+                        fullName = ns + "." + name;
+                    }
+                }
+
                 var ti = new ItemInfo
                 {
                     Guid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName),
@@ -45,7 +59,7 @@ namespace Ghpr.NUnit.Utils
                 };
                 var test = new TestRun
                 {
-                    Name = testNode.GetAttribute("name"),
+                    Name = name,
                     FullName = fullName,
                     TestInfo = ti,
                     TestType = testType,
