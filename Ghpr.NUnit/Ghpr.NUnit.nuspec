@@ -16,7 +16,7 @@
     <tags>.NET package HTML report reporting tool NUnit</tags>
     <dependencies>
       <dependency id="Ghpr.Core" version="0.4.7.1" />
-      <dependency id="NUnit" version="3.6.1" />
+      <dependency id="NUnit" version="3.7.0" />
       <dependency id="NUnit.Engine" version="3.6.1" />
     </dependencies>
   </metadata>
