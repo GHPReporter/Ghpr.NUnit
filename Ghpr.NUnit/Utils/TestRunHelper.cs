@@ -25,18 +25,14 @@ namespace Ghpr.NUnit.Utils
                 var priority = testNode.SelectSingleNode("properties/property[@name='Priority']")?.GetAttribute("value");
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
-
                 var screenNames = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{ScreenHelper.ScreenKeyTemplate}')]")?
                     .Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
-
                 var screens = screenNames?.Select(screenName => new TestScreenshot(screenName))
                     .Cast<ITestScreenshot>().ToList();
-
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
-
                 var fullName = testNode.GetAttribute("fullname");
                 var name = testNode.GetAttribute("name");
                 if (fullName.Contains(name))
