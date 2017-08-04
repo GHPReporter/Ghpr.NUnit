@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml;
 using Ghpr.Core;
 using Ghpr.Core.Common;
+using Ghpr.Core.Helpers;
 using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Extensions;
@@ -26,7 +27,7 @@ namespace Ghpr.NUnit.Utils
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
                 var screenNames = testNode.SelectNodes(
-                        $"properties/property[contains(@name,'{ScreenHelper.ScreenKeyTemplate}')]")?
+                        $"properties/property[contains(@name,'{Paths.Names.ScreenshotKeyTemplate}')]")?
                     .Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
                 var screens = screenNames?.Select(screenName => new TestScreenshot(screenName))

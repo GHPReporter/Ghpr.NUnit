@@ -9,13 +9,6 @@ namespace Ghpr.NUnit.Utils
 {
     public static class ScreenHelper
     {
-        internal const string ScreenKeyTemplate = "ghpr_screenshot_";
-
-        private static string GetScreenKey(int count)
-        {
-            return $"{ScreenKeyTemplate}{count}";
-        }
-
         public static void SaveScreenshot(byte[] screenBytes)
         {
             var guid = TestContext.CurrentContext.Test.Properties.Get("TestGuid")?.ToString();
@@ -24,11 +17,11 @@ namespace Ghpr.NUnit.Utils
             var fullPath = Path.Combine(GhprEventListener.OutputPath, Paths.Folders.Tests, testGuid.ToString(), Paths.Folders.Img);
             var screenshotName = ScreenshotHelper.SaveScreenshot(fullPath, screenBytes, DateTime.Now);
             var count = 0;
-            var screenKey = GetScreenKey(count);
+            var screenKey = ScreenshotHelper.GetScreenKey(count);
             while (TestContext.CurrentContext.Test.Properties.Get(screenKey) != null)
             {
                 count++;
-                screenKey = GetScreenKey(count);
+                screenKey = ScreenshotHelper.GetScreenKey(count);
             }
 
             TestContext.CurrentContext.Test.Properties.Add(screenKey, screenshotName);
