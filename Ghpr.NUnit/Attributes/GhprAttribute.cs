@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
 using Ghpr.Core;
-using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
