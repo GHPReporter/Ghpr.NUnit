@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
@@ -12,7 +13,6 @@ namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
-
         public static ITestRun GetTestRun(XmlNode testNode)
         {
             try
@@ -21,14 +21,45 @@ namespace Ghpr.NUnit.Utils
                 var guid = testNode.SelectSingleNode("properties/property[@name='TestGuid']")?.GetAttribute("value");
                 var testType = testNode.SelectSingleNode("properties/property[@name='TestType']")?.GetAttribute("value");
                 var priority = testNode.SelectSingleNode("properties/property[@name='Priority']")?.GetAttribute("value");
+                var description = testNode.SelectSingleNode("properties/property[@name='Description']")?.GetAttribute("value");
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
+
                 var screenNames = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{Paths.Names.ScreenshotKeyTemplate}')]")?
                     .Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
                 var screens = screenNames?.Select(screenName => new TestScreenshot(screenName))
                     .Cast<ITestScreenshot>().ToList();
+
+                var testDataDateTimes = testNode.SelectNodes(
+                        $"properties/property[contains(@name,'{Paths.Names.TestDataDateTimeKeyTemplate}')]")?
+                    .Cast<XmlNode>()
+                    .Select(n => n.GetAttribute("value")).ToList();
+                var testDataActuals = testNode.SelectNodes(
+                        $"properties/property[contains(@name,'{Paths.Names.TestDataActualKeyTemplate}')]")?
+                    .Cast<XmlNode>()
+                    .Select(n => n.GetAttribute("value")).ToArray();
+                var testDataExpecteds = testNode.SelectNodes(
+                        $"properties/property[contains(@name,'{Paths.Names.TestDataExpectedKeyTemplate}')]")?
+                    .Cast<XmlNode>()
+                    .Select(n => n.GetAttribute("value")).ToArray();
+                var testDataComments = testNode.SelectNodes(
+                        $"properties/property[contains(@name,'{Paths.Names.TestDataCommentKeyTemplate}')]")?
+                    .Cast<XmlNode>()
+                    .Select(n => n.GetAttribute("value")).ToArray();
+                var testData = new List<ITestData>();
+                for (var i = 0; i < testDataDateTimes?.Count; i++)
+                {
+                    testData.Add(new TestData
+                    {
+                        Date = DateTime.ParseExact(testDataDateTimes[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
+                        Actual = testDataActuals?[i],
+                        Expected = testDataExpecteds?[i],
+                        Comment = testDataComments?[i]
+                    });
+                }
+
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
                 var fullName = testNode.GetAttribute("fullname");
@@ -55,6 +86,7 @@ namespace Ghpr.NUnit.Utils
                 {
                     Name = name,
                     FullName = fullName,
+                    Description = description,
                     TestInfo = ti,
                     TestType = testType,
                     Priority = priority,
@@ -64,7 +96,8 @@ namespace Ghpr.NUnit.Utils
                     Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
                     TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
                     TestStackTrace = testNode.SelectSingleNode(".//stack-trace")?.InnerText ?? "",
-                    Screenshots = screens ?? new List<ITestScreenshot>()
+                    Screenshots = screens ?? new List<ITestScreenshot>(),
+                    TestData = testData ?? new List<ITestData>()
                 };
                 return test;
             }
