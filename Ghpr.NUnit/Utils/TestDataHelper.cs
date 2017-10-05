@@ -1,5 +1,4 @@
 ﻿using System;
-using Ghpr.Core.Helpers;
 using NUnit.Framework;
 
 namespace Ghpr.NUnit.Utils
@@ -13,10 +12,16 @@ namespace Ghpr.NUnit.Utils
             var actualKey = Core.Helpers.TestDataHelper.GetTestDataActualKey(count);
             var expectedKey = Core.Helpers.TestDataHelper.GetTestDataExpectedKey(count);
             var commentKey = Core.Helpers.TestDataHelper.GetTestDataCommentKey(count);
-            while (TestContext.CurrentContext.Test.Properties.Get(dateTimeKey) != null)
+            while (TestContext.CurrentContext.Test.Properties.Get(dateTimeKey) != null 
+                && TestContext.CurrentContext.Test.Properties.Get(actualKey) != null 
+                && TestContext.CurrentContext.Test.Properties.Get(expectedKey) != null 
+                && TestContext.CurrentContext.Test.Properties.Get(commentKey) != null)
             {
                 count++;
-                dateTimeKey = ScreenshotHelper.GetScreenKey(count);
+                dateTimeKey = Core.Helpers.TestDataHelper.GetTestDataDateTimeKey(count);
+                actualKey = Core.Helpers.TestDataHelper.GetTestDataActualKey(count);
+                expectedKey = Core.Helpers.TestDataHelper.GetTestDataExpectedKey(count);
+                commentKey = Core.Helpers.TestDataHelper.GetTestDataCommentKey(count);
             }
 
             TestContext.CurrentContext.Test.Properties.Add(dateTimeKey, DateTime.Now.ToString("yyyyMMdd_HHmmssfff"));
