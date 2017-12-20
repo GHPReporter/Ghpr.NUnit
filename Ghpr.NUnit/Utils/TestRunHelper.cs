@@ -63,6 +63,7 @@ namespace Ghpr.NUnit.Utils
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
                 var fullName = testNode.GetAttribute("fullname");
+                var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
                 var name = testNode.GetAttribute("name");
                 if (fullName.Contains(name))
                 {
@@ -78,7 +79,7 @@ namespace Ghpr.NUnit.Utils
 
                 var ti = new ItemInfo
                 {
-                    Guid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName),
+                    Guid = testGuid,
                     Start = testNode.GetAttribute("start-time", now),
                     Finish = testNode.GetAttribute("end-time", now)
                 };
