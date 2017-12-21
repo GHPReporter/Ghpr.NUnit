@@ -87,7 +87,7 @@ namespace Ghpr.NUnit.Utils
                 {
                     Name = name,
                     FullName = fullName,
-                    Description = description,
+                    Description = description == "null" ? "" : description,
                     TestInfo = ti,
                     TestType = testType,
                     Priority = priority,
