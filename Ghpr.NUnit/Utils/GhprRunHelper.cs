@@ -10,7 +10,7 @@ using NUnit;
 
 namespace Ghpr.NUnit.Utils
 {
-    public class RunHelper
+    public class GhprRunHelper
     {
         public static void CreateReportFromFile(string path)
         {
