@@ -6,7 +6,7 @@ namespace ConsoleAppForDebug
     {
         public static void Main(string[] args)
         {
-            GhprRunHelper.CreateReportFromFile(args[0]);
+            GhprNUnitRunHelper.CreateReportFromFile(args[0]);
         }
     }
 }

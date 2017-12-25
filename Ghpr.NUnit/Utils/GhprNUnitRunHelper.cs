@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
 using Ghpr.Core;
 using Ghpr.Core.Enums;
 using Ghpr.NUnit.Extensions;
-using NUnit;
 
 namespace Ghpr.NUnit.Utils
 {
-    public class GhprRunHelper
+    public class GhprNUnitRunHelper
     {
         public static void CreateReportFromFile(string path)
         {
