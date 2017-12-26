@@ -46,11 +46,6 @@ namespace Ghpr.NUnit.Extensions
                     Reporter.TestFinished(TestRunHelper.GetTestRun(xmlNode));
                     break;
                 }
-                default:
-                {
-                    //Log.Warning($"Unknown XML Node! Node name: '{xmlNode.Name}'");
-                    break;
-                }
             }
         }
     }
