@@ -4,6 +4,7 @@ using Ghpr.Core.Helpers;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Extensions;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Ghpr.NUnit.Utils
 {
@@ -18,13 +19,13 @@ namespace Ghpr.NUnit.Utils
             var screenshotName = ScreenshotHelper.SaveScreenshot(fullPath, screenBytes, DateTime.Now);
             var count = 0;
             var screenKey = ScreenshotHelper.GetScreenKey(count);
-            while (TestContext.CurrentContext.Test.Properties.Get(screenKey) != null)
+            while (TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(screenKey) != null)
             {
                 count++;
                 screenKey = ScreenshotHelper.GetScreenKey(count);
             }
 
-            TestContext.CurrentContext.Test.Properties.Add(screenKey, screenshotName);
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(screenKey, screenshotName);
         }
     }
 }

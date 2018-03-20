@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Ghpr.NUnit.Utils
 {
@@ -12,10 +12,10 @@ namespace Ghpr.NUnit.Utils
             var actualKey = Core.Helpers.TestDataHelper.GetTestDataActualKey(count);
             var expectedKey = Core.Helpers.TestDataHelper.GetTestDataExpectedKey(count);
             var commentKey = Core.Helpers.TestDataHelper.GetTestDataCommentKey(count);
-            while (TestContext.CurrentContext.Test.Properties.Get(dateTimeKey) != null 
-                && TestContext.CurrentContext.Test.Properties.Get(actualKey) != null 
-                && TestContext.CurrentContext.Test.Properties.Get(expectedKey) != null 
-                && TestContext.CurrentContext.Test.Properties.Get(commentKey) != null)
+            while (TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(dateTimeKey) != null 
+                && TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(actualKey) != null 
+                && TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(expectedKey) != null 
+                && TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(commentKey) != null)
             {
                 count++;
                 dateTimeKey = Core.Helpers.TestDataHelper.GetTestDataDateTimeKey(count);
@@ -24,10 +24,10 @@ namespace Ghpr.NUnit.Utils
                 commentKey = Core.Helpers.TestDataHelper.GetTestDataCommentKey(count);
             }
 
-            TestContext.CurrentContext.Test.Properties.Add(dateTimeKey, DateTime.Now.ToString("yyyyMMdd_HHmmssfff"));
-            TestContext.CurrentContext.Test.Properties.Add(actualKey, actual);
-            TestContext.CurrentContext.Test.Properties.Add(expectedKey, expected);
-            TestContext.CurrentContext.Test.Properties.Add(commentKey, comment);
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(dateTimeKey, DateTime.Now.ToString("yyyyMMdd_HHmmssfff"));
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(actualKey, actual);
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(expectedKey, expected);
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(commentKey, comment);
         }
     }
 }
