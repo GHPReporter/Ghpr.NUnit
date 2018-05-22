@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
-using Ghpr.Core.Interfaces;
+using Ghpr.Core.Extensions;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Extensions;
 using NUnit;
@@ -13,7 +13,7 @@ namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
-        public static ITestRun GetTestRun(XmlNode testNode)
+        public static TestRunDto GetTestRun(XmlNode testNode)
         {
             try
             {
@@ -24,13 +24,6 @@ namespace Ghpr.NUnit.Utils
                 var description = testNode.SelectSingleNode("properties/property[@name='Description']")?.GetAttribute("value");
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
-
-                var screenNames = testNode.SelectNodes(
-                        $"properties/property[contains(@name,'{Paths.Names.ScreenshotKeyTemplate}')]")?
-                    .Cast<XmlNode>()
-                    .Select(n => n.GetAttribute("value")).ToArray();
-                var screens = screenNames?.Select(screenName => new TestScreenshot(screenName))
-                    .Cast<ITestScreenshot>().ToList();
 
                 var testDataDateTimes = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{Paths.Names.TestDataDateTimeKeyTemplate}')]")?
@@ -48,12 +41,12 @@ namespace Ghpr.NUnit.Utils
                         $"properties/property[contains(@name,'{Paths.Names.TestDataCommentKeyTemplate}')]")?
                     .Cast<XmlNode>()
                     .Select(n => n.GetAttribute("value")).ToArray();
-                var testData = new List<ITestData>();
+                var testData = new List<TestDataDto>();
                 for (var i = 0; i < testDataDateTimes?.Count; i++)
                 {
-                    testData.Add(new TestData
+                    testData.Add(new TestDataDto
                     {
-                        Date = DateTime.ParseExact(testDataDateTimes[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
+                        Date = DateTime.ParseExact(testDataDateTimes?[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
                         Actual = testDataActuals?[i],
                         Expected = testDataExpecteds?[i],
                         Comment = testDataComments?[i]
@@ -63,7 +56,7 @@ namespace Ghpr.NUnit.Utils
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
                 var fullName = testNode.GetAttribute("fullname");
-                var testGuid = guid != null ? Guid.Parse(guid) : GuidConverter.ToMd5HashGuid(fullName);
+                var testGuid = guid != null ? Guid.Parse(guid) : fullName.ToMd5HashGuid();
                 var name = testNode.GetAttribute("name");
                 if (fullName.Contains(name))
                 {
@@ -77,13 +70,13 @@ namespace Ghpr.NUnit.Utils
                     }
                 }
 
-                var ti = new ItemInfo
+                var ti = new ItemInfoDto
                 {
                     Guid = testGuid,
                     Start = testNode.GetAttribute("start-time", now),
                     Finish = testNode.GetAttribute("end-time", now)
                 };
-                var test = new TestRun
+                var test = new TestRunDto
                 {
                     Name = name,
                     FullName = fullName,
@@ -93,12 +86,11 @@ namespace Ghpr.NUnit.Utils
                     Priority = priority,
                     Categories = categories,
                     Result = r != null ? (l != null ? $"{r}: {l}" : r) : "Unknown",
-                    TestDuration = testNode.GetAttribute("duration", 0.0),
                     Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
                     TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
                     TestStackTrace = testNode.SelectSingleNode(".//stack-trace")?.InnerText ?? "",
-                    Screenshots = screens ?? new List<ITestScreenshot>(),
-                    TestData = testData ?? new List<ITestData>()
+                    Screenshots = new List<TestScreenshotDto>(),
+                    TestData = testData ?? new List<TestDataDto>()
                 };
                 return test;
             }
@@ -106,7 +98,7 @@ namespace Ghpr.NUnit.Utils
             {
                 var log = new Core.Utils.Log(GhprEventListener.OutputPath);
                 log.Exception(ex, "Exception in GetTestRun");
-                return new TestRun();
+                return new TestRunDto();
             }
         }
     }

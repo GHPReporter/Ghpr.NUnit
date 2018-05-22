@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Xml;
-using Ghpr.Core;
+using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
+using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Utils;
@@ -13,13 +14,13 @@ namespace Ghpr.NUnit.Attributes
     [AttributeUsage(AttributeTargets.Method)]
     public class GhprTestAttribute : Attribute, ITestAction
     {
-        private static readonly Reporter Reporter;
-        public static string OutputPath => Reporter.Settings.OutputPath;
+        private static readonly IReporter Reporter;
+        public static string OutputPath => Reporter.ReporterSettings.OutputPath;
 
         static GhprTestAttribute()
         {
-            Reporter = new Reporter(TestingFramework.NUnit);
-            StaticLog.Initialize(Reporter.Settings.OutputPath);
+            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new ScreenshotService());
+            StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
         }
 
         public void BeforeTest(ITest nunitTest)
@@ -46,7 +47,7 @@ namespace Ghpr.NUnit.Attributes
 
         public ActionTargets Targets => ActionTargets.Test;
 
-        private ITestRun GetGhprTestRun(ITest nunitTest)
+        private TestRunDto GetGhprTestRun(ITest nunitTest)
         {
             var testXml = nunitTest.ToXml(true).OuterXml;
             var xDoc = new XmlDocument();

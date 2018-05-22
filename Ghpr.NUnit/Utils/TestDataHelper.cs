@@ -1,4 +1,5 @@
 ﻿using System;
+using Ghpr.Core.Utils;
 using NUnit.Framework.Internal;
 
 namespace Ghpr.NUnit.Utils
@@ -8,20 +9,20 @@ namespace Ghpr.NUnit.Utils
         public static void AddTestData(string actual, string expected, string comment)
         {
             var count = 0;
-            var dateTimeKey = Core.Helpers.TestDataHelper.GetTestDataDateTimeKey(count);
-            var actualKey = Core.Helpers.TestDataHelper.GetTestDataActualKey(count);
-            var expectedKey = Core.Helpers.TestDataHelper.GetTestDataExpectedKey(count);
-            var commentKey = Core.Helpers.TestDataHelper.GetTestDataCommentKey(count);
+            var dateTimeKey = Paths.GetTestDataDateTimeKey(count);
+            var actualKey = Paths.GetTestDataActualKey(count);
+            var expectedKey = Paths.GetTestDataExpectedKey(count);
+            var commentKey = Paths.GetTestDataCommentKey(count);
             while (TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(dateTimeKey) != null 
                 && TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(actualKey) != null 
                 && TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(expectedKey) != null 
                 && TestExecutionContext.CurrentContext.CurrentTest.Properties.Get(commentKey) != null)
             {
                 count++;
-                dateTimeKey = Core.Helpers.TestDataHelper.GetTestDataDateTimeKey(count);
-                actualKey = Core.Helpers.TestDataHelper.GetTestDataActualKey(count);
-                expectedKey = Core.Helpers.TestDataHelper.GetTestDataExpectedKey(count);
-                commentKey = Core.Helpers.TestDataHelper.GetTestDataCommentKey(count);
+                dateTimeKey = Paths.GetTestDataDateTimeKey(count);
+                actualKey = Paths.GetTestDataActualKey(count);
+                expectedKey = Paths.GetTestDataExpectedKey(count);
+                commentKey = Paths.GetTestDataCommentKey(count);
             }
 
             TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(dateTimeKey, DateTime.Now.ToString("yyyyMMdd_HHmmssfff"));

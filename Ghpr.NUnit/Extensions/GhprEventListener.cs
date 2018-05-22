@@ -1,5 +1,6 @@
-﻿using Ghpr.Core;
-using Ghpr.Core.Enums;
+﻿using Ghpr.Core.Enums;
+using Ghpr.Core.Factories;
+using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Utils;
 using NUnit;
@@ -11,13 +12,13 @@ namespace Ghpr.NUnit.Extensions
     [Extension(Description = "Ghpr NUnit Extension")]
     public class GhprEventListener : ITestEventListener
     {
-        private static readonly Reporter Reporter;
-        public static string OutputPath => Reporter.Settings.OutputPath;
+        private static readonly IReporter Reporter;
+        public static string OutputPath => Reporter.ReporterSettings.OutputPath;
 
         static GhprEventListener()
         {
-            Reporter = new Reporter(TestingFramework.NUnit);
-            StaticLog.Initialize(Reporter.Settings.OutputPath);
+            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new ScreenshotService());
+            StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
         }
 
         public void OnTestEvent(string report)

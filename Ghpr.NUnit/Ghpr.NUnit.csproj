@@ -35,13 +35,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ghpr.Core, Version=0.8.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Ghpr.Core.0.8.2\lib\net452\Ghpr.Core.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Ghpr.Core.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.Engine.3.8.0\lib\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit-agent, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.Engine.3.8.0\lib\nunit-agent.exe</HintPath>
@@ -75,13 +77,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\GhprNUnitRunHelper.cs" />
-    <Compile Include="Utils\ScreenHelper.cs" />
+    <Compile Include="Utils\ScreenshotService.cs" />
     <Compile Include="Utils\TestDataHelper.cs" />
     <Compile Include="Utils\TestRunHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Ghpr.Core.Settings.json" />
+    <None Include="dlls\Ghpr.Core.Settings.json" />
     <None Include="Ghpr.NUnit.Settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -91,6 +93,13 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dlls\Ghpr.Core.dll" />
+    <Content Include="dlls\Ghpr.LocalFileSystem.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using Ghpr.Core;
+using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
-using Ghpr.Core.Interfaces;
+using Ghpr.Core.Factories;
 using Ghpr.NUnit.Extensions;
 
 namespace Ghpr.NUnit.Utils
@@ -16,7 +16,7 @@ namespace Ghpr.NUnit.Utils
         {
             try
             {
-                var reporter = new Reporter(TestingFramework.NUnit);
+                var reporter = ReporterFactory.Build(TestingFramework.NUnit, new ScreenshotService());
                 var testRuns = GetTestRunsListFromFile(path);
                 reporter.GenerateFullReport(testRuns);
             }
@@ -27,7 +27,7 @@ namespace Ghpr.NUnit.Utils
             }
         }
 
-        public static List<ITestRun> GetTestRunsListFromFile(string path)
+        public static List<TestRunDto> GetTestRunsListFromFile(string path)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Ghpr.NUnit.Utils
                 doc.LoadXml(xmlString);
                 XmlNode node = doc.DocumentElement;
                 var testCases = node?.SelectNodes(".//*/test-case")?.Cast<XmlNode>().ToList();
-                var list = testCases?.Select(TestRunHelper.GetTestRun).ToList() ?? new List<ITestRun>();
+                var list = testCases?.Select(TestRunHelper.GetTestRun).ToList() ?? new List<TestRunDto>();
                 return list;
             }
             catch (Exception ex)
