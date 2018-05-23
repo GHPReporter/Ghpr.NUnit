@@ -19,6 +19,7 @@ namespace Ghpr.NUnit.Extensions
         {
             Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
             StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
+            ScreenHelper.Init(Reporter);
         }
 
         public void OnTestEvent(string report)
