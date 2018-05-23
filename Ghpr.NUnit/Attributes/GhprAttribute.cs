@@ -19,7 +19,7 @@ namespace Ghpr.NUnit.Attributes
 
         static GhprTestAttribute()
         {
-            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new ScreenshotService());
+            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
             StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
         }
 

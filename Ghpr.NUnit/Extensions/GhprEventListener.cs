@@ -17,7 +17,7 @@ namespace Ghpr.NUnit.Extensions
 
         static GhprEventListener()
         {
-            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new ScreenshotService());
+            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
             StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
         }
 

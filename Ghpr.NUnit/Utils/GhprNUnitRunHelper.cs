@@ -16,7 +16,7 @@ namespace Ghpr.NUnit.Utils
         {
             try
             {
-                var reporter = ReporterFactory.Build(TestingFramework.NUnit, new ScreenshotService());
+                var reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
                 var testRuns = GetTestRunsListFromFile(path);
                 reporter.GenerateFullReport(testRuns);
             }
