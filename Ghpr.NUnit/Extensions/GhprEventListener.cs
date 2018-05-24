@@ -12,14 +12,13 @@ namespace Ghpr.NUnit.Extensions
     [Extension(Description = "Ghpr NUnit Extension")]
     public class GhprEventListener : ITestEventListener
     {
-        private static readonly IReporter Reporter;
+        internal static readonly IReporter Reporter;
         public static string OutputPath => Reporter.ReporterSettings.OutputPath;
 
         static GhprEventListener()
         {
             Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
             StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
-            ScreenHelper.Init(Reporter);
         }
 
         public void OnTestEvent(string report)
@@ -40,12 +39,12 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "start-test":
                 {
-                    Reporter.TestStarted(TestRunHelper.GetTestRun(xmlNode));
+                    Reporter.TestStarted(TestRunHelper.GetTestRunOnStarted(xmlNode));
                     break;
                 }
                 case "test-case":
                 {
-                    Reporter.TestFinished(TestRunHelper.GetTestRun(xmlNode));
+                    Reporter.TestFinished(TestRunHelper.GetTestRunOnFinished(xmlNode));
                     break;
                 }
             }

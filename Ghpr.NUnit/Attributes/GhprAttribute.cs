@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml;
-using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
@@ -31,7 +30,7 @@ namespace Ghpr.NUnit.Attributes
             }
             if (!nunitTest.IsSuite)
             {
-                var ghprTest = GetGhprTestRun(nunitTest);
+                var ghprTest = TestRunHelper.GetTestRunOnStarted(GetTestNode(nunitTest));
                 Reporter.TestFinished(ghprTest);
             }
         }
@@ -40,20 +39,19 @@ namespace Ghpr.NUnit.Attributes
         {
             if (!nunitTest.IsSuite)
             {
-                var ghprTest = GetGhprTestRun(nunitTest);
+                var ghprTest = TestRunHelper.GetTestRunOnFinished(GetTestNode(nunitTest));
                 Reporter.TestFinished(ghprTest);
             }
         }
 
         public ActionTargets Targets => ActionTargets.Test;
 
-        private TestRunDto GetGhprTestRun(ITest nunitTest)
+        private static XmlNode GetTestNode(ITest nunitTest)
         {
             var testXml = nunitTest.ToXml(true).OuterXml;
             var xDoc = new XmlDocument();
             xDoc.LoadXml(testXml);
-            var testRun = TestRunHelper.GetTestRun(xDoc.DocumentElement);
-            return testRun;
+            return xDoc;
         }
     }
 }

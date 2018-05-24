@@ -13,6 +13,20 @@ namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
+        public static TestRunDto GetTestRunOnStarted(XmlNode testNode)
+        {
+            var testRun = GetTestRun(testNode);
+            testRun.TestInfo.Start = DateTime.UtcNow;
+            return testRun;
+        }
+
+        public static TestRunDto GetTestRunOnFinished(XmlNode testNode)
+        {
+            var testRun = GetTestRun(testNode);
+            testRun.TestInfo.Finish = DateTime.UtcNow;
+            return testRun;
+        }
+
         public static TestRunDto GetTestRun(XmlNode testNode)
         {
             try
