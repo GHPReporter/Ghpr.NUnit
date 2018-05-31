@@ -41,15 +41,13 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "start-test":
                 {
-                    var testRunDto = TestRunHelper.GetTestRunOnStarted(xmlNode);
-                    testRunDto.TestInfo.Start = eventTime;
-                    Reporter.TestStarted(TestRunHelper.GetTestRunOnStarted(xmlNode));
+                    var testRunDto = TestRunHelper.GetTestRunOnStarted(xmlNode, eventTime);
+                    Reporter.TestStarted(testRunDto);
                     break;
                 }
                 case "test-case":
                 {
-                    var testRunDto = TestRunHelper.GetTestRunOnFinished(xmlNode);
-                    testRunDto.TestInfo.Finish = eventTime;
+                    var testRunDto = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime);
                     Reporter.TestFinished(testRunDto);
                     break;
                 }
