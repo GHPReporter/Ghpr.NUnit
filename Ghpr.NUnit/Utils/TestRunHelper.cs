@@ -16,14 +16,14 @@ namespace Ghpr.NUnit.Utils
         public static TestRunDto GetTestRunOnStarted(XmlNode testNode)
         {
             var testRun = GetTestRun(testNode);
-            testRun.TestInfo.Start = DateTime.UtcNow;
+            testRun.TestInfo.Start = DateTime.Now;
             return testRun;
         }
 
         public static TestRunDto GetTestRunOnFinished(XmlNode testNode)
         {
             var testRun = GetTestRun(testNode);
-            testRun.TestInfo.Finish = DateTime.UtcNow;
+            testRun.TestInfo.Finish = DateTime.Now;
             return testRun;
         }
 
@@ -83,7 +83,6 @@ namespace Ghpr.NUnit.Utils
                         fullName = ns + "." + name;
                     }
                 }
-
                 var ti = new ItemInfoDto
                 {
                     Guid = testGuid,

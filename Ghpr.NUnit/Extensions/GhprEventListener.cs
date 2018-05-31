@@ -1,4 +1,5 @@
-﻿using Ghpr.Core.Enums;
+﻿using System;
+using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
@@ -23,6 +24,7 @@ namespace Ghpr.NUnit.Extensions
 
         public void OnTestEvent(string report)
         {
+            var eventTime = DateTime.Now;
             var xmlNode = XmlHelper.CreateXmlNode(report);
 
             switch (xmlNode.Name)
@@ -39,12 +41,16 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "start-test":
                 {
+                    var testRunDto = TestRunHelper.GetTestRunOnStarted(xmlNode);
+                    testRunDto.TestInfo.Start = eventTime;
                     Reporter.TestStarted(TestRunHelper.GetTestRunOnStarted(xmlNode));
                     break;
                 }
                 case "test-case":
                 {
-                    Reporter.TestFinished(TestRunHelper.GetTestRunOnFinished(xmlNode));
+                    var testRunDto = TestRunHelper.GetTestRunOnFinished(xmlNode);
+                    testRunDto.TestInfo.Finish = eventTime;
+                    Reporter.TestFinished(testRunDto);
                     break;
                 }
             }
