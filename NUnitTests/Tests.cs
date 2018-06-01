@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Ghpr.NUnit.Utils;
 using NUnit.Framework;
@@ -38,14 +39,15 @@ namespace NUnitTests
         [Category("Cat1")]
         [Category("Failed")]
         [Description("This is test description")]
-        public void SimpleFailedTest()
+        public void SimplePassedTest()
         {
             Console.WriteLine("This is test output, we are logging some stuff!");
             Console.WriteLine($"Comparing '{TestData.Actual}' and '{TestData.Expected}'");
             TestDataHelper.AddTestData(TestData.Actual, TestData.Expected, "Let's compare to XML strings!");
             Console.WriteLine($"Comparing '{TestData.Actual}' and '{TestData.Expected}'");
             TestDataHelper.AddTestData(TestData.Actual, TestData.Expected, "Let's compare for the second time!");
-            Assert.AreEqual(1, 2);
+            TestContext.AddTestAttachment(Path.GetTempFileName());
+            Assert.AreEqual(1, 1);
         }
 
         public static byte[] TakeScreen()
