@@ -1,6 +1,6 @@
 ﻿{
   "outputPath": "C:\\_GHPReporter_NUnit_Report",
-  "dataServiceFile": "Ghpr.CouchDb.dll",
+  "dataServiceFile": "Ghpr.LocalFileSystem.dll",
   "sprint": "",
   "runName": "",
   "runGuid": "",
