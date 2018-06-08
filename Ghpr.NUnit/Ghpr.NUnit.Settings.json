@@ -1,6 +1,7 @@
 ﻿{
   "outputPath": "C:\\_GHPReporter_NUnit_Report",
   "dataServiceFile": "Ghpr.LocalFileSystem.dll",
+  "loggerFile": "Ghpr.SerilogToSeqLogger.dll",
   "sprint": "",
   "runName": "",
   "runGuid": "",

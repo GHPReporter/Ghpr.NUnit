@@ -85,9 +85,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Ghpr.Core.Settings.json" />
-    <None Include="Ghpr.CouchDb.Settings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Ghpr.NUnit.Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -100,12 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ghpr.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Ghpr.CouchDb.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Ghpr.LocalFileSystem.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Newtonsoft.Json.dll">

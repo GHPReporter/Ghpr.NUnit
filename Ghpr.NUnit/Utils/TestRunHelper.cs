@@ -5,29 +5,29 @@ using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
+using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
-using Ghpr.NUnit.Extensions;
 using NUnit;
 
 namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
-        public static TestRunDto GetTestRunOnStarted(XmlNode testNode, DateTime startDateTime)
+        public static TestRunDto GetTestRunOnStarted(XmlNode testNode, DateTime startDateTime, ILogger logger)
         {
-            var testRun = GetTestRun(testNode);
+            var testRun = GetTestRun(testNode, logger);
             testRun.TestInfo.Start = startDateTime;
             return testRun;
         }
 
-        public static TestRunDto GetTestRunOnFinished(XmlNode testNode, DateTime finishDateTime)
+        public static TestRunDto GetTestRunOnFinished(XmlNode testNode, DateTime finishDateTime, ILogger logger)
         {
-            var testRun = GetTestRun(testNode);
+            var testRun = GetTestRun(testNode, logger);
             testRun.TestInfo.Finish = finishDateTime;
             return testRun;
         }
 
-        public static TestRunDto GetTestRun(XmlNode testNode)
+        public static TestRunDto GetTestRun(XmlNode testNode, ILogger logger)
         {
             try
             {
@@ -109,8 +109,7 @@ namespace Ghpr.NUnit.Utils
             }
             catch (Exception ex)
             {
-                var log = new Core.Utils.Log(GhprEventListener.OutputPath);
-                log.Exception(ex, "Exception in GetTestRun");
+                logger.Exception("Exception in GetTestRun", ex);
                 return new TestRunDto();
             }
         }

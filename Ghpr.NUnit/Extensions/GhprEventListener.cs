@@ -2,7 +2,6 @@
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
-using Ghpr.Core.Utils;
 using Ghpr.NUnit.Utils;
 using NUnit;
 using NUnit.Engine;
@@ -19,7 +18,6 @@ namespace Ghpr.NUnit.Extensions
         static GhprEventListener()
         {
             Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
-            StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
         }
 
         public void OnTestEvent(string report)
@@ -34,21 +32,27 @@ namespace Ghpr.NUnit.Extensions
                     Reporter.RunStarted();
                     break;
                 }
-                case "test-run":
-                {
-                    Reporter.RunFinished();
-                    break;
-                }
                 case "start-test":
                 {
-                    var testRunDto = TestRunHelper.GetTestRunOnStarted(xmlNode, eventTime);
+                    var testRunDto = TestRunHelper.GetTestRunOnStarted(xmlNode, eventTime, Reporter.Logger);
                     Reporter.TestStarted(testRunDto);
                     break;
                 }
                 case "test-case":
                 {
-                    var testRunDto = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime);
+                    var testRunDto = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
                     Reporter.TestFinished(testRunDto);
+                    break;
+                }
+                case "test-run":
+                {
+                    Reporter.RunFinished();
+                    Reporter.TearDown();
+                    break;
+                }
+                default:
+                {
+
                     break;
                 }
             }

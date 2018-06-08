@@ -37,8 +37,38 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Ghpr.NUnit\Ghpr.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Ghpr.CouchDb">
+      <HintPath>..\dlls\Ghpr.CouchDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Ghpr.LocalFileSystem">
+      <HintPath>..\dlls\Ghpr.LocalFileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Ghpr.SerilogToSeqLogger">
+      <HintPath>..\dlls\Ghpr.SerilogToSeqLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="Ghpr.SimpleFileLogger">
+      <HintPath>..\dlls\Ghpr.SimpleFileLogger.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\Ghpr.NUnit\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>..\dlls\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Formatting.Compact">
+      <HintPath>..\dlls\Serilog.Formatting.Compact.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Settings.AppSettings">
+      <HintPath>..\dlls\Serilog.Settings.AppSettings.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File">
+      <HintPath>..\dlls\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.PeriodicBatching">
+      <HintPath>..\dlls\Serilog.Sinks.PeriodicBatching.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Seq">
+      <HintPath>..\dlls\Serilog.Sinks.Seq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +87,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\dlls\Ghpr.CouchDb.Settings.json">
+      <Link>Ghpr.CouchDb.Settings.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\dlls\Ghpr.SimpleFileLogger.Settings.json">
+      <Link>Ghpr.SimpleFileLogger.Settings.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

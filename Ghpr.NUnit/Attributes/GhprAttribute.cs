@@ -3,7 +3,6 @@ using System.Xml;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
-using Ghpr.Core.Utils;
 using Ghpr.NUnit.Utils;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -19,7 +18,6 @@ namespace Ghpr.NUnit.Attributes
         static GhprTestAttribute()
         {
             Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
-            StaticLog.Initialize(Reporter.ReporterSettings.OutputPath);
         }
 
         public void BeforeTest(ITest nunitTest)
@@ -30,7 +28,7 @@ namespace Ghpr.NUnit.Attributes
             }
             if (!nunitTest.IsSuite)
             {
-                var ghprTest = TestRunHelper.GetTestRunOnStarted(GetTestNode(nunitTest), DateTime.Now);
+                var ghprTest = TestRunHelper.GetTestRunOnStarted(GetTestNode(nunitTest), DateTime.Now, Reporter.Logger);
                 Reporter.TestFinished(ghprTest);
             }
         }
@@ -39,7 +37,7 @@ namespace Ghpr.NUnit.Attributes
         {
             if (!nunitTest.IsSuite)
             {
-                var ghprTest = TestRunHelper.GetTestRunOnFinished(GetTestNode(nunitTest), DateTime.Now);
+                var ghprTest = TestRunHelper.GetTestRunOnFinished(GetTestNode(nunitTest), DateTime.Now, Reporter.Logger);
                 Reporter.TestFinished(ghprTest);
             }
         }

@@ -6,7 +6,7 @@ using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
-using Ghpr.NUnit.Extensions;
+using Ghpr.Core.Interfaces;
 
 namespace Ghpr.NUnit.Utils
 {
@@ -14,20 +14,21 @@ namespace Ghpr.NUnit.Utils
     {
         public static void CreateReportFromFile(string path)
         {
+            IReporter reporter = null;
             try
             {
-                var reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
-                var testRuns = GetTestRunsListFromFile(path);
+                reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
+                var testRuns = GetTestRunsListFromFile(path, reporter.Logger);
                 reporter.GenerateFullReport(testRuns);
+                reporter.TearDown();
             }
             catch (Exception ex)
             {
-                var log = new Core.Utils.Log(GhprEventListener.OutputPath);
-                log.Exception(ex, "Exception in CreateReportFromFile");
+                reporter?.Logger.Exception("Exception in CreateReportFromFile", ex);
             }
         }
 
-        public static List<TestRunDto> GetTestRunsListFromFile(string path)
+        public static List<TestRunDto> GetTestRunsListFromFile(string path, ILogger logger)
         {
             try
             {
@@ -36,13 +37,12 @@ namespace Ghpr.NUnit.Utils
                 doc.LoadXml(xmlString);
                 XmlNode node = doc.DocumentElement;
                 var testCases = node?.SelectNodes(".//*/test-case")?.Cast<XmlNode>().ToList();
-                var list = testCases?.Select(TestRunHelper.GetTestRun).ToList() ?? new List<TestRunDto>();
+                var list = testCases?.Select(n => TestRunHelper.GetTestRun(n, logger)).ToList() ?? new List<TestRunDto>();
                 return list;
             }
             catch (Exception ex)
             {
-                var log = new Core.Utils.Log(GhprEventListener.OutputPath);
-                log.Exception(ex, "Exception in GetTestRunsListFromFile");
+                logger.Exception("Exception in GetTestRunsListFromFile", ex);
                 return null;
             }
         }
