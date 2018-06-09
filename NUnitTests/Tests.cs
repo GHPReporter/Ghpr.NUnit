@@ -25,10 +25,10 @@ namespace NUnitTests
         [Category("Screenshots")]
         public void TestMethodFailed()
         {
-            Console.WriteLine("Taking screen...");
-            var bytes = TakeScreen();
+            //Console.WriteLine("Taking screen...");
+            //var bytes = TakeScreen();
             //all you need to do is to pass byte[] to ScreenHelper:
-            ScreenHelper.SaveScreenshot(bytes);
+            //ScreenHelper.SaveScreenshot(bytes);
             Console.WriteLine("Done.");
             Assert.Fail("Noooooo..... Test is failed.");
         }
@@ -39,6 +39,7 @@ namespace NUnitTests
         [Category("Cat1")]
         [Category("Failed")]
         [Description("This is test description")]
+        [Ignore("Skipped for now")]
         public void SimplePassedTest()
         {
             Console.WriteLine("This is test output, we are logging some stuff!");
