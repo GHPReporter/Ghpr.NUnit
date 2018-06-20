@@ -131,7 +131,7 @@ namespace Ghpr.NUnit.Utils
                     },
                     TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
                     TestStackTrace = testNode.SelectSingleNode(".//stack-trace")?.InnerText ?? "",
-                    Screenshots = new List<SimpleItemInfoDto>(),//new List<TestScreenshotDto>(),
+                    Screenshots = new List<SimpleItemInfoDto>(),
                     TestData = testData ?? new List<TestDataDto>()
                 };
                 return test;
