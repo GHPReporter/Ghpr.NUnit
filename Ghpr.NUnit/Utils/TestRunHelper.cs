@@ -13,18 +13,40 @@ namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
-        public static TestRunDto GetTestRunOnStarted(XmlNode testNode, DateTime startDateTime, ILogger logger)
+        public static KeyValuePair<TestRunDto, TestOutputDto> GetTestRunOnStarted(XmlNode testNode, DateTime startDateTime, ILogger logger)
         {
             var testRun = GetTestRun(testNode, logger);
             testRun.TestInfo.Start = startDateTime;
-            return testRun;
+            return new KeyValuePair<TestRunDto, TestOutputDto>(testRun, new TestOutputDto());
         }
 
-        public static TestRunDto GetTestRunOnFinished(XmlNode testNode, DateTime finishDateTime, ILogger logger)
+        public static KeyValuePair<TestRunDto, TestOutputDto> GetTestRunOnFinished(XmlNode testNode, DateTime finishDateTime, ILogger logger)
         {
             var testRun = GetTestRun(testNode, logger);
             testRun.TestInfo.Finish = finishDateTime;
-            return testRun;
+            var testOutput = GetTestOutput(testNode, finishDateTime, logger);
+            return new KeyValuePair<TestRunDto,TestOutputDto>(testRun, testOutput);
+        }
+
+        public static KeyValuePair<TestRunDto, TestOutputDto> GetTestAndOutput(XmlNode testNode, ILogger logger)
+        {
+            var testRun = GetTestRun(testNode, logger);
+            var testOutput = GetTestOutput(testNode, testRun.TestInfo.Finish, logger);
+            return new KeyValuePair<TestRunDto, TestOutputDto>(testRun, testOutput);
+        }
+
+        public static TestOutputDto GetTestOutput(XmlNode testNode, DateTime testFinishDate, ILogger logger)
+        {
+            var output = new TestOutputDto
+            {
+                FeatureOutput = "",
+                Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
+                TestOutputInfo = new SimpleItemInfoDto
+                {
+                    Date = testFinishDate
+                }
+            };
+            return output;
         }
 
         public static TestRunDto GetTestRun(XmlNode testNode, ILogger logger)
@@ -60,13 +82,16 @@ namespace Ghpr.NUnit.Utils
                 {
                     testData.Add(new TestDataDto
                     {
-                        Date = DateTime.ParseExact(testDataDateTimes?[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
+                        TestDataInfo = new SimpleItemInfoDto
+                        {
+                            Date = DateTime.ParseExact(testDataDateTimes?[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
+                            ItemName = "Test Data"
+                        },
                         Actual = testDataActuals?[i],
                         Expected = testDataExpecteds?[i],
                         Comment = testDataComments?[i]
                     });
                 }
-
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
                 var fullName = testNode.GetAttribute("fullname");
@@ -99,10 +124,14 @@ namespace Ghpr.NUnit.Utils
                     Priority = priority,
                     Categories = categories,
                     Result = r != null ? (l != null ? $"{r}: {l}" : r) : "Unknown",
-                    Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
+                    Output = new SimpleItemInfoDto
+                    {
+                        Date = ti.Finish,
+                        ItemName = "Test Output"
+                    },
                     TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
                     TestStackTrace = testNode.SelectSingleNode(".//stack-trace")?.InnerText ?? "",
-                    Screenshots = new List<TestScreenshotDto>(),
+                    Screenshots = new List<SimpleItemInfoDto>(),//new List<TestScreenshotDto>(),
                     TestData = testData ?? new List<TestDataDto>()
                 };
                 return test;

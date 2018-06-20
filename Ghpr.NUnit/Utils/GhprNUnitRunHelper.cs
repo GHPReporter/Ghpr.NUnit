@@ -28,7 +28,7 @@ namespace Ghpr.NUnit.Utils
             }
         }
 
-        public static List<TestRunDto> GetTestRunsListFromFile(string path, ILogger logger)
+        public static List<KeyValuePair<TestRunDto, TestOutputDto>> GetTestRunsListFromFile(string path, ILogger logger)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Ghpr.NUnit.Utils
                 doc.LoadXml(xmlString);
                 XmlNode node = doc.DocumentElement;
                 var testCases = node?.SelectNodes(".//*/test-case")?.Cast<XmlNode>().ToList();
-                var list = testCases?.Select(n => TestRunHelper.GetTestRun(n, logger)).ToList() ?? new List<TestRunDto>();
+                var list = testCases?.Select(n => TestRunHelper.GetTestAndOutput(n, logger)).ToList() ?? new List<KeyValuePair<TestRunDto, TestOutputDto>>();
                 return list;
             }
             catch (Exception ex)
