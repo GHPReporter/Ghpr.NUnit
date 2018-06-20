@@ -39,7 +39,7 @@ namespace NUnitTests
         [Category("Cat1")]
         [Category("Failed")]
         [Description("This is test description")]
-        [Ignore("Skipped for now")]
+        //[Ignore("Skipped for now")]
         public void SimplePassedTest()
         {
             Console.WriteLine("This is test output, we are logging some stuff!");
