@@ -25,7 +25,7 @@ namespace Ghpr.NUnit.Extensions
             var eventTime = DateTime.Now;
             var xmlNode = XmlHelper.CreateXmlNode(report);
 
-            Reporter.Logger.Warn(report);
+            //Reporter.Logger.Warn(report);
 
             switch (xmlNode.Name)
             {

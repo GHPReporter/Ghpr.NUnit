@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
 using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
+using Ghpr.NUnit.Extensions;
 using NUnit;
 
 namespace Ghpr.NUnit.Utils
@@ -134,6 +136,32 @@ namespace Ghpr.NUnit.Utils
                     Screenshots = new List<SimpleItemInfoDto>(),
                     TestData = testData ?? new List<TestDataDto>()
                 };
+
+                var imageAttachments = testNode.SelectNodes(
+                        ".//attachments/attachment/filePath[contains(.,'.png') or contains(.,'.jpeg') or contains(.,'.bmp')]")?
+                    .Cast<XmlNode>().Select(n => n.InnerText).ToList();
+
+                foreach (var imageAttachment in imageAttachments)
+                {
+                    var ext = Path.GetExtension(imageAttachment);
+                    var fileInfo = new FileInfo(imageAttachment);
+                    var bytes = File.ReadAllBytes(imageAttachment);
+                    var base64 = Convert.ToBase64String(bytes);
+                    var screenInfo = new SimpleItemInfoDto
+                    {
+                        Date = fileInfo.CreationTime,
+                        ItemName = ""
+                    };
+                    var testScreenshotDto = new TestScreenshotDto
+                    {
+                        Format = ext.Replace(".", ""),
+                        TestGuid = testGuid,
+                        TestScreenshotInfo = screenInfo,
+                        Base64Data = base64
+                    };
+                    GhprEventListener.Reporter.DataService.SaveScreenshot(testScreenshotDto);
+                }
+
                 return test;
             }
             catch (Exception ex)
