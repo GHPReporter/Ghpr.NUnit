@@ -51,12 +51,42 @@ namespace Ghpr.NUnit.Utils
             return output;
         }
 
+        public static List<KeyValuePair<ItemInfoDto, TestOutputDto>> GetOutputsFromFeature(XmlNode featureNode, List<ItemInfoDto> finishedTestInfoDtos)
+        {
+            var featureOutput = featureNode.SelectSingleNode(".//output")?.InnerText ?? "";
+            var res = new List<KeyValuePair<ItemInfoDto, TestOutputDto>>();
+            var testNodes = featureNode.SelectNodes("")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
+            if (!testNodes.Any() || featureOutput.Equals(""))
+            {
+                return res;
+            }
+            foreach (var testNode in testNodes)
+            {
+                var testGuid = GetTestGuid(testNode);
+                var testInfoDto = finishedTestInfoDtos.FirstOrDefault(i => i.Guid.Equals(testGuid));
+                var testOutputDto = new TestOutputDto
+                {
+                    TestOutputInfo = new SimpleItemInfoDto(),
+                    FeatureOutput = featureOutput,
+                    Output = testNode.SelectSingleNode(".//output")?.InnerText ?? ""
+                };
+                var data = new KeyValuePair<ItemInfoDto, TestOutputDto> (testInfoDto, testOutputDto);
+                res.Add(data);
+            }
+            return res;
+        }
+
+        private static Guid GetTestGuid(XmlNode testNode)
+        {
+            var guid = testNode.SelectSingleNode("properties/property[@name='TestGuid']")?.GetAttribute("value");
+            return guid != null ? Guid.Parse(guid) : testNode.GetAttribute("fullname").ToMd5HashGuid();
+        }
+
         public static TestRunDto GetTestRun(XmlNode testNode, ILogger logger)
         {
             try
             {
                 var now = DateTime.Now;
-                var guid = testNode.SelectSingleNode("properties/property[@name='TestGuid']")?.GetAttribute("value");
                 var testType = testNode.SelectSingleNode("properties/property[@name='TestType']")?.GetAttribute("value");
                 var priority = testNode.SelectSingleNode("properties/property[@name='Priority']")?.GetAttribute("value");
                 var description = testNode.SelectSingleNode("properties/property[@name='Description']")?.GetAttribute("value");
@@ -97,7 +127,7 @@ namespace Ghpr.NUnit.Utils
                 var r = testNode.GetAttribute("result");
                 var l = testNode.GetAttribute("label");
                 var fullName = testNode.GetAttribute("fullname");
-                var testGuid = guid != null ? Guid.Parse(guid) : fullName.ToMd5HashGuid();
+                var testGuid = GetTestGuid(testNode);
                 var name = testNode.GetAttribute("name");
                 if (fullName.Contains(name))
                 {
