@@ -41,7 +41,7 @@ namespace Ghpr.NUnit.Utils
         {
             var output = new TestOutputDto
             {
-                FeatureOutput = "",
+                SuiteOutput = "",
                 Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
                 TestOutputInfo = new SimpleItemInfoDto
                 {
@@ -51,12 +51,12 @@ namespace Ghpr.NUnit.Utils
             return output;
         }
 
-        public static List<KeyValuePair<ItemInfoDto, TestOutputDto>> GetOutputsFromFeature(XmlNode featureNode, List<ItemInfoDto> finishedTestInfoDtos)
+        public static List<KeyValuePair<ItemInfoDto, TestOutputDto>> GetOutputsFromSuite(XmlNode suiteNode, List<ItemInfoDto> finishedTestInfoDtos)
         {
-            var featureOutput = featureNode.SelectSingleNode(".//output")?.InnerText ?? "";
+            var suiteOutput = suiteNode.SelectSingleNode(".//output")?.InnerText ?? "";
             var res = new List<KeyValuePair<ItemInfoDto, TestOutputDto>>();
-            var testNodes = featureNode.SelectNodes(".//test-case")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
-            if (!testNodes.Any() || featureOutput.Equals(""))
+            var testNodes = suiteNode.SelectNodes(".//test-case")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
+            if (!testNodes.Any() || suiteOutput.Equals(""))
             {
                 return res;
             }
@@ -67,7 +67,7 @@ namespace Ghpr.NUnit.Utils
                 var testOutputDto = new TestOutputDto
                 {
                     TestOutputInfo = new SimpleItemInfoDto(),
-                    FeatureOutput = featureOutput,
+                    SuiteOutput = suiteOutput,
                     Output = testNode.SelectSingleNode(".//output")?.InnerText ?? ""
                 };
                 var data = new KeyValuePair<ItemInfoDto, TestOutputDto> (testInfoDto, testOutputDto);

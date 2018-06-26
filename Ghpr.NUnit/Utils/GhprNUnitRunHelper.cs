@@ -38,6 +38,19 @@ namespace Ghpr.NUnit.Utils
                 XmlNode node = doc.DocumentElement;
                 var testCases = node?.SelectNodes(".//*/test-case")?.Cast<XmlNode>().ToList();
                 var list = testCases?.Select(n => TestRunHelper.GetTestAndOutput(n, logger)).ToList() ?? new List<KeyValuePair<TestRunDto, TestOutputDto>>();
+                var testSuites = node?.SelectNodes(".//*/test-suite")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
+                var testInfoDtos = list.Select(d => d.Key.TestInfo).ToList();
+                foreach (var testSuite in testSuites)
+                {
+                    var testOutputs = TestRunHelper.GetOutputsFromSuite(testSuite, testInfoDtos);
+                    foreach (var output in testOutputs)
+                    {
+                        var test = list.FirstOrDefault(t => t.Key.TestInfo.Guid == output.Key.Guid
+                                                            && t.Key.TestInfo.Finish == output.Key.Finish);
+                        test.Value.Output = output.Value.Output;
+                        test.Value.SuiteOutput = output.Value.SuiteOutput;
+                    }
+                }
                 return list;
             }
             catch (Exception ex)

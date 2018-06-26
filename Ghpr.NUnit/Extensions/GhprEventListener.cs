@@ -26,9 +26,6 @@ namespace Ghpr.NUnit.Extensions
         public void OnTestEvent(string report)
         {
             var eventTime = DateTime.Now;
-
-            Reporter.Logger.Warn(report);
-
             var xmlNode = XmlHelper.CreateXmlNode(report);
 
             switch (xmlNode.Name)
@@ -54,7 +51,7 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "test-suite":
                 {
-                    var featureOutputData = TestRunHelper.GetOutputsFromFeature(xmlNode, _finishedTestInfoDtos);
+                    var featureOutputData = TestRunHelper.GetOutputsFromSuite(xmlNode, _finishedTestInfoDtos);
                     foreach (var data in featureOutputData)
                     {
                         Reporter.DataService.UpdateTestOutput(data.Key, data.Value);
