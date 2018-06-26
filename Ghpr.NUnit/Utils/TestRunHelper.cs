@@ -55,7 +55,7 @@ namespace Ghpr.NUnit.Utils
         {
             var featureOutput = featureNode.SelectSingleNode(".//output")?.InnerText ?? "";
             var res = new List<KeyValuePair<ItemInfoDto, TestOutputDto>>();
-            var testNodes = featureNode.SelectNodes("")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
+            var testNodes = featureNode.SelectNodes(".//test-case")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
             if (!testNodes.Any() || featureOutput.Equals(""))
             {
                 return res;
