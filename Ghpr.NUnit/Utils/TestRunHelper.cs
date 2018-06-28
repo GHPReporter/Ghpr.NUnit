@@ -42,7 +42,7 @@ namespace Ghpr.NUnit.Utils
             var output = new TestOutputDto
             {
                 SuiteOutput = "",
-                Output = testNode.SelectSingleNode(".//output")?.InnerText ?? "",
+                Output = testNode.SelectSingleNode("./output")?.InnerText ?? "",
                 TestOutputInfo = new SimpleItemInfoDto
                 {
                     Date = testFinishDate
@@ -53,9 +53,9 @@ namespace Ghpr.NUnit.Utils
 
         public static List<KeyValuePair<ItemInfoDto, TestOutputDto>> GetOutputsFromSuite(XmlNode suiteNode, List<ItemInfoDto> finishedTestInfoDtos)
         {
-            var suiteOutput = suiteNode.SelectSingleNode(".//output")?.InnerText ?? "";
+            var suiteOutput = suiteNode.SelectSingleNode("./output")?.InnerText ?? "";
             var res = new List<KeyValuePair<ItemInfoDto, TestOutputDto>>();
-            var testNodes = suiteNode.SelectNodes(".//test-case")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
+            var testNodes = suiteNode.SelectNodes("./test-case")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
             if (!testNodes.Any() || suiteOutput.Equals(""))
             {
                 return res;
@@ -68,7 +68,7 @@ namespace Ghpr.NUnit.Utils
                 {
                     TestOutputInfo = new SimpleItemInfoDto(),
                     SuiteOutput = suiteOutput,
-                    Output = testNode.SelectSingleNode(".//output")?.InnerText ?? ""
+                    Output = testNode.SelectSingleNode("./output")?.InnerText ?? ""
                 };
                 var data = new KeyValuePair<ItemInfoDto, TestOutputDto> (testInfoDto, testOutputDto);
                 res.Add(data);
@@ -161,8 +161,8 @@ namespace Ghpr.NUnit.Utils
                         Date = ti.Finish,
                         ItemName = "Test Output"
                     },
-                    TestMessage = testNode.SelectSingleNode(".//message")?.InnerText ?? "",
-                    TestStackTrace = testNode.SelectSingleNode(".//stack-trace")?.InnerText ?? "",
+                    TestMessage = testNode.SelectSingleNode("./message")?.InnerText ?? "",
+                    TestStackTrace = testNode.SelectSingleNode("./stack-trace")?.InnerText ?? "",
                     Screenshots = new List<SimpleItemInfoDto>(),
                     TestData = testData ?? new List<TestDataDto>()
                 };
