@@ -33,42 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.8.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Ghpr.NUnit\Ghpr.Core.dll</HintPath>
+    <Reference Include="Ghpr.Core, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Ghpr.Core.0.9.0\lib\net452\Ghpr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ghpr.CouchDb">
-      <HintPath>..\dlls\Ghpr.CouchDb.dll</HintPath>
+    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Ghpr.LocalFileSystem.0.9.0\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Ghpr.LocalFileSystem">
-      <HintPath>..\dlls\Ghpr.LocalFileSystem.dll</HintPath>
+    <Reference Include="Ghpr.SimpleFileLogger, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Ghpr.SimpleFileLogger.0.9.0\lib\net452\Ghpr.SimpleFileLogger.dll</HintPath>
     </Reference>
-    <Reference Include="Ghpr.SerilogToSeqLogger">
-      <HintPath>..\dlls\Ghpr.SerilogToSeqLogger.dll</HintPath>
-    </Reference>
-    <Reference Include="Ghpr.SimpleFileLogger">
-      <HintPath>..\dlls\Ghpr.SimpleFileLogger.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\Ghpr.NUnit\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog">
-      <HintPath>..\dlls\Serilog.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.Formatting.Compact">
-      <HintPath>..\dlls\Serilog.Formatting.Compact.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.Settings.AppSettings">
-      <HintPath>..\dlls\Serilog.Settings.AppSettings.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.Sinks.File">
-      <HintPath>..\dlls\Serilog.Sinks.File.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.Sinks.PeriodicBatching">
-      <HintPath>..\dlls\Serilog.Sinks.PeriodicBatching.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.Sinks.Seq">
-      <HintPath>..\dlls\Serilog.Sinks.Seq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -89,14 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\dlls\Ghpr.CouchDb.Settings.json">
-      <Link>Ghpr.CouchDb.Settings.json</Link>
+    <None Include="Ghpr.Core.Settings.json" />
+    <Content Include="Ghpr.SimpleFileLogger.Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\dlls\Ghpr.SimpleFileLogger.Settings.json">
-      <Link>Ghpr.SimpleFileLogger.Settings.json</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

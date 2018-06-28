@@ -10,15 +10,15 @@
     <projectUrl>https://github.com/GHPReporter/Ghpr.NUnit</projectUrl>
     <iconUrl>https://github.com/GHPReporter/GHPReporter.github.io/blob/master/img/logo-small.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Easy-to-use test run reporter for NUnit 3</description>
+    <description>Easy-to-use test run reporter for NUnit 3 (NUnit Console Addin)</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright Evgeniy Kosjakov © 2016-2018</copyright>
     <tags>.NET QA package HTML report reporting testing tool framework NUnit 3</tags>
     <dependencies>
-      <dependency id="Ghpr.Core" version="0.8.2.0" />
+      <dependency id="Ghpr.Core" version="0.9.0.0" />
       <dependency id="NUnit" version="3.10.1" />
       <dependency id="NUnit.Engine" version="3.8.0" />
-      <dependency id="Newtonsoft.Json" version="11.0.1" />
+      <dependency id="Newtonsoft.Json" version="11.0.2" />
     </dependencies>
   </metadata>
   <files>
