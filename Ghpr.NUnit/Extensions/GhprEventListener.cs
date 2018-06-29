@@ -6,6 +6,7 @@ using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
+using Ghpr.NUnit.Common;
 using Ghpr.NUnit.Utils;
 using NUnit;
 using NUnit.Engine;
@@ -19,6 +20,8 @@ namespace Ghpr.NUnit.Extensions
         internal static readonly IReporter Reporter;
         public static string OutputPath => Reporter.ReporterSettings.OutputPath;
         private List<ItemInfoDto> _finishedTestInfoDtos;
+        private List<NUnitTestCase> _testCases;
+        private List<NUnitTestSuite> _testSuites;
 
         static GhprEventListener()
         {
@@ -30,12 +33,15 @@ namespace Ghpr.NUnit.Extensions
             var eventTime = DateTime.Now;
             var xmlNode = XmlHelper.CreateXmlNode(report);
 
+            Reporter.Logger.Warn(report);
             switch (xmlNode.Name)
             {
                 case "start-run":
                 {
                     Reporter.RunStarted();
                     _finishedTestInfoDtos = new List<ItemInfoDto>();
+                    _testCases = new List<NUnitTestCase>();
+                    _testSuites = new List<NUnitTestSuite>();
                     break;
                 }
                 case "start-test":
@@ -49,6 +55,13 @@ namespace Ghpr.NUnit.Extensions
                     var testRun = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
                     Reporter.TestFinished(testRun.Key, testRun.Value);
                     _finishedTestInfoDtos.Add(testRun.Key.TestInfo);
+                    _testCases.Add(new NUnitTestCase
+                    {
+                        GhprTestInfo = testRun.Key.TestInfo,
+                        GhprTestOutput = testRun.Value,
+                        Id = "",
+                        ParentId = ""
+                    });
                     break;
                 }
                 case "test-suite":
