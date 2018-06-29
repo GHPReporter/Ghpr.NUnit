@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
@@ -52,22 +53,24 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "test-suite":
                 {
-                    Reporter.Logger.Warn(report);
-                    var featureOutputData = TestRunHelper.GetOutputsFromSuite(xmlNode, _finishedTestInfoDtos);
-                    if (featureOutputData.Any())
-                    {
-                        Reporter.Logger.Info(string.Join(Environment.NewLine, 
-                            featureOutputData.Select(fo => fo.Value.SuiteOutput + 
-                                                           " " + fo.Value.TestOutputInfo.Date)));
-                    }
-                    foreach (var data in featureOutputData)
-                    {
-                        Reporter.DataService.UpdateTestOutput(data.Key, data.Value);
-                    }
+                    //var featureOutputData = TestRunHelper.GetOutputsFromSuite(xmlNode, _finishedTestInfoDtos);
+                    //foreach (var data in featureOutputData)
+                    //{
+                    //    Reporter.DataService.UpdateTestOutput(data.Key, data.Value);
+                    //}
                     break;
                 }
                 case "test-run":
                 {
+                    var testSuites = xmlNode.SelectNodes(".//*/test-suite")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
+                    foreach (var testSuite in testSuites)
+                    {
+                        var testOutputs = TestRunHelper.GetOutputsFromSuite(testSuite, _finishedTestInfoDtos);
+                        foreach (var data in testOutputs)
+                        {
+                            Reporter.DataService.UpdateTestOutput(data.Key, data.Value);    
+                        }
+                    }
                     Reporter.RunFinished();
                     Reporter.TearDown();
                     break;
