@@ -8,33 +8,32 @@ using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
 using Ghpr.Core.Interfaces;
 using Ghpr.Core.Utils;
-using Ghpr.NUnit.Extensions;
+using Ghpr.NUnit.Common;
 using NUnit;
 
 namespace Ghpr.NUnit.Utils
 {
     public static class TestRunHelper
     {
-        public static KeyValuePair<TestRunDto, TestOutputDto> GetTestRunOnStarted(XmlNode testNode, DateTime startDateTime, ILogger logger)
+        public static GhprTestCase GetTestRunOnStarted(XmlNode testNode, DateTime startDateTime, ILogger logger)
         {
-            var testRun = GetTestRun(testNode, logger);
-            testRun.TestInfo.Start = startDateTime;
-            return new KeyValuePair<TestRunDto, TestOutputDto>(testRun, new TestOutputDto());
+            var testCase = GetTestRun(testNode, logger);
+            testCase.GhprTestRun.TestInfo.Start = startDateTime;
+            return testCase;
         }
 
-        public static KeyValuePair<TestRunDto, TestOutputDto> GetTestRunOnFinished(XmlNode testNode, DateTime finishDateTime, ILogger logger)
+        public static GhprTestCase GetTestRunOnFinished(XmlNode testNode, DateTime finishDateTime, ILogger logger)
         {
-            var testRun = GetTestRun(testNode, logger);
-            testRun.TestInfo.Finish = finishDateTime;
-            var testOutput = GetTestOutput(testNode, finishDateTime, logger);
-            return new KeyValuePair<TestRunDto,TestOutputDto>(testRun, testOutput);
+            var testCase = GetTestRun(testNode, logger);
+            testCase.GhprTestRun.TestInfo.Finish = finishDateTime;
+            return testCase;
         }
 
         public static KeyValuePair<TestRunDto, TestOutputDto> GetTestAndOutput(XmlNode testNode, ILogger logger)
         {
             var testRun = GetTestRun(testNode, logger);
-            var testOutput = GetTestOutput(testNode, testRun.TestInfo.Finish, logger);
-            return new KeyValuePair<TestRunDto, TestOutputDto>(testRun, testOutput);
+            var testOutput = GetTestOutput(testNode, testRun.GhprTestRun.TestInfo.Finish, logger);
+            return new KeyValuePair<TestRunDto, TestOutputDto>(testRun.GhprTestRun, testOutput);
         }
 
         public static TestOutputDto GetTestOutput(XmlNode testNode, DateTime testFinishDate, ILogger logger)
@@ -49,6 +48,20 @@ namespace Ghpr.NUnit.Utils
                 }
             };
             return output;
+        }
+
+        public static GhprTestSuite GetTestSuite(XmlNode suiteNode)
+        {
+            var suiteOutput = suiteNode.SelectSingleNode("./output")?.InnerText ?? "";
+            var id = suiteNode.GetAttribute("id") ?? "";
+            var parentId = suiteNode.GetAttribute("parentId") ?? "";
+            var ts = new GhprTestSuite
+            {
+                Id = id,
+                ParentId = parentId,
+                Output = suiteOutput
+            };
+            return ts;
         }
 
         public static List<KeyValuePair<ItemInfoDto, TestOutputDto>> GetOutputsFromSuite(XmlNode suiteNode, List<ItemInfoDto> finishedTestInfoDtos)
@@ -82,7 +95,7 @@ namespace Ghpr.NUnit.Utils
             return guid != null ? Guid.Parse(guid) : testNode.GetAttribute("fullname").ToMd5HashGuid();
         }
 
-        public static TestRunDto GetTestRun(XmlNode testNode, ILogger logger)
+        public static GhprTestCase GetTestRun(XmlNode testNode, ILogger logger)
         {
             try
             {
@@ -116,7 +129,7 @@ namespace Ghpr.NUnit.Utils
                     {
                         TestDataInfo = new SimpleItemInfoDto
                         {
-                            Date = DateTime.ParseExact(testDataDateTimes?[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
+                            Date = DateTime.ParseExact(testDataDateTimes[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
                             ItemName = "Test Data"
                         },
                         Actual = testDataActuals?[i],
@@ -129,6 +142,8 @@ namespace Ghpr.NUnit.Utils
                 var fullName = testNode.GetAttribute("fullname");
                 var testGuid = GetTestGuid(testNode);
                 var name = testNode.GetAttribute("name");
+                var id = testNode.GetAttribute("id") ?? "";
+                var parentId = testNode.GetAttribute("parentId") ?? "";
                 if (fullName.Contains(name))
                 {
                     var ns = fullName.Substring(0, fullName.LastIndexOf(name, StringComparison.Ordinal) - 1);
@@ -171,6 +186,7 @@ namespace Ghpr.NUnit.Utils
                         ".//attachments/attachment/filePath[contains(.,'.png') or contains(.,'.jpeg') or contains(.,'.bmp')]")?
                     .Cast<XmlNode>().Select(n => n.InnerText).ToList();
 
+                var testScreenshots = new List<TestScreenshotDto>();
                 foreach (var imageAttachment in imageAttachments)
                 {
                     var ext = Path.GetExtension(imageAttachment);
@@ -189,15 +205,24 @@ namespace Ghpr.NUnit.Utils
                         TestScreenshotInfo = screenInfo,
                         Base64Data = base64
                     };
-                    GhprEventListener.Reporter.DataService.SaveScreenshot(testScreenshotDto);
+                    testScreenshots.Add(testScreenshotDto);
                 }
 
-                return test;
+                var ghprTestCase = new GhprTestCase
+                {
+                    Id = id,
+                    ParentId = parentId,
+                    GhprTestRun = test,
+                    GhprTestOutput = GetTestOutput(testNode, test.TestInfo.Finish, logger),
+                    GhprTestScreenshots = testScreenshots
+                };
+                
+                return ghprTestCase;
             }
             catch (Exception ex)
             {
                 logger.Exception("Exception in GetTestRun", ex);
-                return new TestRunDto();
+                return new GhprTestCase();
             }
         }
     }

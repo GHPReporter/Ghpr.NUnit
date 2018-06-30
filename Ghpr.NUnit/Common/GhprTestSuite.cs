@@ -1,6 +1,6 @@
 ﻿namespace Ghpr.NUnit.Common
 {
-    public class NUnitTestSuite
+    public class GhprTestSuite
     {
         public string Id { get; set; }
         public string ParentId { get; set; }

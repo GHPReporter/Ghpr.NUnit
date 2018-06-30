@@ -20,8 +20,8 @@ namespace Ghpr.NUnit.Extensions
         internal static readonly IReporter Reporter;
         public static string OutputPath => Reporter.ReporterSettings.OutputPath;
         private List<ItemInfoDto> _finishedTestInfoDtos;
-        private List<NUnitTestCase> _testCases;
-        private List<NUnitTestSuite> _testSuites;
+        private List<GhprTestCase> _testCases;
+        private List<GhprTestSuite> _testSuites;
 
         static GhprEventListener()
         {
@@ -40,37 +40,33 @@ namespace Ghpr.NUnit.Extensions
                 {
                     Reporter.RunStarted();
                     _finishedTestInfoDtos = new List<ItemInfoDto>();
-                    _testCases = new List<NUnitTestCase>();
-                    _testSuites = new List<NUnitTestSuite>();
+                    _testCases = new List<GhprTestCase>();
+                    _testSuites = new List<GhprTestSuite>();
                     break;
                 }
                 case "start-test":
                 {
                     var testRun = TestRunHelper.GetTestRunOnStarted(xmlNode, eventTime, Reporter.Logger);
-                    Reporter.TestStarted(testRun.Key);
+                    Reporter.TestStarted(testRun.GhprTestRun);
                     break;
                 }
                 case "test-case":
                 {
-                    var testRun = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
-                    Reporter.TestFinished(testRun.Key, testRun.Value);
-                    _finishedTestInfoDtos.Add(testRun.Key.TestInfo);
-                    _testCases.Add(new NUnitTestCase
+                    var testCase = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
+                    testCase.GhprTestOutput.TestOutputInfo.Date = eventTime;
+                    Reporter.TestFinished(testCase.GhprTestRun, testCase.GhprTestOutput);
+                    foreach (var screenshot in testCase.GhprTestScreenshots)
                     {
-                        GhprTestInfo = testRun.Key.TestInfo,
-                        GhprTestOutput = testRun.Value,
-                        Id = "",
-                        ParentId = ""
-                    });
+                        Reporter.DataService.SaveScreenshot(screenshot);
+                    }
+                    _finishedTestInfoDtos.Add(testCase.GhprTestRun.TestInfo);
+                    _testCases.Add(testCase);
                     break;
                 }
                 case "test-suite":
                 {
-                    //var featureOutputData = TestRunHelper.GetOutputsFromSuite(xmlNode, _finishedTestInfoDtos);
-                    //foreach (var data in featureOutputData)
-                    //{
-                    //    Reporter.DataService.UpdateTestOutput(data.Key, data.Value);
-                    //}
+                    var testSuite = TestRunHelper.GetTestSuite(xmlNode);
+                    _testSuites.Add(testSuite);
                     break;
                 }
                 case "test-run":
