@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
@@ -19,7 +17,6 @@ namespace Ghpr.NUnit.Extensions
     {
         internal static readonly IReporter Reporter;
         public static string OutputPath => Reporter.ReporterSettings.OutputPath;
-        private List<ItemInfoDto> _finishedTestInfoDtos;
         private List<GhprTestCase> _testCases;
         private List<GhprTestSuite> _testSuites;
 
@@ -33,13 +30,11 @@ namespace Ghpr.NUnit.Extensions
             var eventTime = DateTime.Now;
             var xmlNode = XmlHelper.CreateXmlNode(report);
 
-            Reporter.Logger.Warn(report);
             switch (xmlNode.Name)
             {
                 case "start-run":
                 {
                     Reporter.RunStarted();
-                    _finishedTestInfoDtos = new List<ItemInfoDto>();
                     _testCases = new List<GhprTestCase>();
                     _testSuites = new List<GhprTestSuite>();
                     break;
@@ -59,7 +54,6 @@ namespace Ghpr.NUnit.Extensions
                     {
                         Reporter.DataService.SaveScreenshot(screenshot);
                     }
-                    _finishedTestInfoDtos.Add(testCase.GhprTestRun.TestInfo);
                     _testCases.Add(testCase);
                     break;
                 }
@@ -67,19 +61,24 @@ namespace Ghpr.NUnit.Extensions
                 {
                     var testSuite = TestRunHelper.GetTestSuite(xmlNode);
                     _testSuites.Add(testSuite);
+                    var tests = _testCases.Where(tc => tc.ParentId.Equals(testSuite.Id) && !tc.ParentId.Equals(""))
+                        .ToList();
+                    var childSuites = _testSuites
+                        .Where(ts => ts.ParentId.Equals(testSuite.Id) && !ts.ParentId.Equals("") && ts.Type.Equals("ParameterizedFixture")).ToList();
+                    foreach (var suite in childSuites)
+                    {
+                        tests.AddRange(_testCases.Where(tc => tc.ParentId.Equals(suite.Id) && !tc.ParentId.Equals("")));
+                    }
+                    foreach (var test in tests)
+                    {
+                        test.GhprTestOutput.SuiteOutput = testSuite.Output;
+                        Reporter.DataService.UpdateTestOutput(test.GhprTestRun.TestInfo, test.GhprTestOutput);
+                    }
+                    
                     break;
                 }
                 case "test-run":
                 {
-                    var testSuites = xmlNode.SelectNodes(".//*/test-suite")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
-                    foreach (var testSuite in testSuites)
-                    {
-                        var testOutputs = TestRunHelper.GetOutputsFromSuite(testSuite, _finishedTestInfoDtos);
-                        foreach (var data in testOutputs)
-                        {
-                            Reporter.DataService.UpdateTestOutput(data.Key, data.Value);    
-                        }
-                    }
                     Reporter.RunFinished();
                     Reporter.TearDown();
                     break;

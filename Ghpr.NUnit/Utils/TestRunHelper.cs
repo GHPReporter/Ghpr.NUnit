@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
@@ -55,11 +56,13 @@ namespace Ghpr.NUnit.Utils
             var suiteOutput = suiteNode.SelectSingleNode("./output")?.InnerText ?? "";
             var id = suiteNode.GetAttribute("id") ?? "";
             var parentId = suiteNode.GetAttribute("parentId") ?? "";
+            var type = suiteNode.GetAttribute("type") ?? "";
             var ts = new GhprTestSuite
             {
                 Id = id,
                 ParentId = parentId,
-                Output = suiteOutput
+                Output = suiteOutput,
+                Type = type
             };
             return ts;
         }
@@ -176,8 +179,8 @@ namespace Ghpr.NUnit.Utils
                         Date = ti.Finish,
                         ItemName = "Test Output"
                     },
-                    TestMessage = testNode.SelectSingleNode("./message")?.InnerText ?? "",
-                    TestStackTrace = testNode.SelectSingleNode("./stack-trace")?.InnerText ?? "",
+                    TestMessage = testNode.SelectSingleNode("./failure/message")?.InnerText ?? "",
+                    TestStackTrace = testNode.SelectSingleNode("./failure/stack-trace")?.InnerText ?? "",
                     Screenshots = new List<SimpleItemInfoDto>(),
                     TestData = testData ?? new List<TestDataDto>()
                 };

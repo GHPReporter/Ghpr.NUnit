@@ -19,5 +19,10 @@ namespace Ghpr.NUnit.Common
         public TestRunDto GhprTestRun { get; set; }
         public TestOutputDto GhprTestOutput { get; set; }
         public List<TestScreenshotDto> GhprTestScreenshots { get; set; }
+
+        public override string ToString()
+        {
+            return $"GhprTestCase: Id = {Id}, ParentID = {ParentId}";
+        }
     }
 }
