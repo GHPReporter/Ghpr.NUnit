@@ -71,3 +71,7 @@ Please read [Core instructions](https://github.com/GHPReporter/Ghpr.Core#view-re
 ## Contributing
 
 Anyone contributing is welcome. Write [issues](https://github.com/GHPReporter/Ghpr.NUnit/issues), create [pull requests](https://github.com/GHPReporter/Ghpr.NUnit/pulls).
+
+# Release notes
+
+You can find it [here](https://github.com/GHPReporter/Ghpr.Core/blob/master/RELEASE_NOTES.md) for all packages.
