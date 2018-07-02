@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.9.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.Core.0.9.0.2\lib\net452\Ghpr.Core.dll</HintPath>
+    <Reference Include="Ghpr.Core, Version=0.9.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Ghpr.Core.0.9.0.3\lib\net452\Ghpr.Core.dll</HintPath>
     </Reference>
     <Reference Include="Ghpr.LocalFileSystem, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Ghpr.NUnit\packages\Ghpr.LocalFileSystem.0.9.0\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
