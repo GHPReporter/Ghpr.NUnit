@@ -22,7 +22,8 @@ Please use this project with targetFramework v4.5.2
 
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
- - Add relative path to `Ghpr.NUnit.dll` from build folder of your tests (example: **addins/Ghpr.NUnit.dll**) into `nunit.engine.addins` file (file located in *[nunit_console_location]/nunit-console/addins*). Also make sure that your build contains such libraries and files  as `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.LocalFileSystem.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll`
+ - Add relative path to `Ghpr.NUnit.dll` from build folder of your tests (example: _addins/../../../Users/Evgeniy_Kosjakov/Documents/GitHub/Ghpr.NUnit.Examples/build/Ghpr.NUnit.dll_) into `nunit.engine.addins` file (file located in *[nunit_console_location]/nunit-console/addins*). Also make sure that your build contains such libraries and files  as `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.LocalFileSystem.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll`:
+ ![image](https://user-images.githubusercontent.com/6689884/42174465-21b053a6-7e2b-11e8-8bae-a5cced08812f.png)
  - Run your tests via NUnit Console
  
  **NOTE:** If you are going to take screenshots inside yout tests, then make sure that you have the same `Ghpr.NUnit.Settings.json` file inside your C# project and inside NUnit.Console addins folder.
@@ -33,7 +34,7 @@ Please, read [this](https://github.com/GHPReporter/Ghpr.Core#how-to-publish-the-
 
 ## How to work with screenshots
 
-If you want to add screenshots to your report, you need to implement your own method of taking screenshot as `byte[]`. This is needed because there is no way to take screenshot which will work on any testing framework or CI tool (such as Jenkins or TeamCity). If you are using WebDriver, you can take screenshot using WebDriver.
+If you want to add screenshots to your report, you need to implement your own method of taking screenshot as `byte[]`. This is needed because there is no way to take screenshot which will work on any testing framework or CI tool (such as Jenkins or TeamCity). If you are using WebDriver, you can take screenshot using WebDriver. Also NUnit attachments are supported. 
 
 ```csharp
 [Test]
