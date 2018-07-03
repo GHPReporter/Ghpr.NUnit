@@ -131,7 +131,7 @@ namespace Ghpr.NUnit.Utils
                     {
                         TestDataInfo = new SimpleItemInfoDto
                         {
-                            Date = DateTime.ParseExact(testDataDateTimes[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
+                            Date = DateTime.ParseExact(testDataDateTimes?[i], "yyyyMMdd_HHmmssfff", CultureInfo.InvariantCulture),
                             ItemName = "Test Data"
                         },
                         Actual = testDataActuals?[i],
@@ -144,6 +144,7 @@ namespace Ghpr.NUnit.Utils
                 var fullName = testNode.GetAttribute("fullname");
                 var testGuid = GetTestGuid(testNode);
                 var name = testNode.GetAttribute("name");
+                var duration = double.Parse(testNode.GetAttribute("duration") ?? "0.0");
                 var id = testNode.GetAttribute("id") ?? "";
                 var parentId = testNode.GetAttribute("parentId") ?? "";
                 if (fullName.Contains(name))
@@ -168,6 +169,7 @@ namespace Ghpr.NUnit.Utils
                     Name = name,
                     FullName = fullName,
                     Description = description == "null" ? "" : description,
+                    Duration = duration,
                     TestInfo = ti,
                     TestType = testType,
                     Priority = priority,
