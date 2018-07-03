@@ -30,11 +30,10 @@ namespace Ghpr.NUnit.Utils
             return testCase;
         }
 
-        public static KeyValuePair<TestRunDto, TestOutputDto> GetTestAndOutput(XmlNode testNode, ILogger logger)
+        public static GhprTestCase GetTestAndOutput(XmlNode testNode, ILogger logger)
         {
             var testRun = GetTestRun(testNode, logger);
-            var testOutput = GetTestOutput(testNode, testRun.GhprTestRun.TestInfo.Finish, logger);
-            return new KeyValuePair<TestRunDto, TestOutputDto>(testRun.GhprTestRun, testOutput);
+            return testRun;
         }
 
         public static TestOutputDto GetTestOutput(XmlNode testNode, DateTime testFinishDate, ILogger logger)

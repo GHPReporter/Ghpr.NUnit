@@ -7,6 +7,7 @@ using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
+using Ghpr.NUnit.Common;
 
 namespace Ghpr.NUnit.Utils
 {
@@ -19,7 +20,14 @@ namespace Ghpr.NUnit.Utils
             {
                 reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
                 var testRuns = GetTestRunsListFromFile(path, reporter.Logger);
-                reporter.GenerateFullReport(testRuns);
+                foreach (var ghprTestCase in testRuns.Where(t => t.GhprTestScreenshots.Any()))
+                {
+                    foreach (var screenshot in ghprTestCase.GhprTestScreenshots)
+                    {
+                        reporter.DataService.SaveScreenshot(screenshot);
+                    }
+                }
+                reporter.GenerateFullReport(testRuns.Select(tr => new KeyValuePair<TestRunDto, TestOutputDto>(tr.GhprTestRun, tr.GhprTestOutput)).ToList());
                 reporter.TearDown();
             }
             catch (Exception ex)
@@ -28,7 +36,7 @@ namespace Ghpr.NUnit.Utils
             }
         }
 
-        public static List<KeyValuePair<TestRunDto, TestOutputDto>> GetTestRunsListFromFile(string path, ILogger logger)
+        public static List<GhprTestCase> GetTestRunsListFromFile(string path, ILogger logger)
         {
             try
             {
@@ -37,18 +45,18 @@ namespace Ghpr.NUnit.Utils
                 doc.LoadXml(xmlString);
                 XmlNode node = doc.DocumentElement;
                 var testCases = node?.SelectNodes(".//*/test-case")?.Cast<XmlNode>().ToList();
-                var list = testCases?.Select(n => TestRunHelper.GetTestAndOutput(n, logger)).ToList() ?? new List<KeyValuePair<TestRunDto, TestOutputDto>>();
+                var list = testCases?.Select(n => TestRunHelper.GetTestAndOutput(n, logger)).ToList() ?? new List<GhprTestCase>();
                 var testSuites = node?.SelectNodes(".//*/test-suite")?.Cast<XmlNode>().ToList() ?? new List<XmlNode>();
-                var testInfoDtos = list.Select(d => d.Key.TestInfo).ToList();
+                var testInfoDtos = list.Select(d => d.GhprTestRun.TestInfo).ToList();
                 foreach (var testSuite in testSuites)
                 {
                     var testOutputs = TestRunHelper.GetOutputsFromSuite(testSuite, testInfoDtos);
                     foreach (var output in testOutputs)
                     {
-                        var test = list.FirstOrDefault(t => t.Key.TestInfo.Guid == output.Key.Guid
-                                                            && t.Key.TestInfo.Finish == output.Key.Finish);
-                        test.Value.Output = output.Value.Output;
-                        test.Value.SuiteOutput = output.Value.SuiteOutput;
+                        var test = list.FirstOrDefault(t => t.GhprTestRun.TestInfo.Guid == output.Key.Guid
+                                                            && t.GhprTestRun.TestInfo.Finish == output.Key.Finish) ?? new GhprTestCase();
+                        test.GhprTestOutput.Output = output.Value.Output;
+                        test.GhprTestOutput.SuiteOutput = output.Value.SuiteOutput;
                     }
                 }
                 return list;
