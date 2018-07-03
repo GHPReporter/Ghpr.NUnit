@@ -15,8 +15,8 @@
     <copyright>Copyright Evgeniy Kosjakov © 2016-2018</copyright>
     <tags>.NET QA package HTML report reporting testing tool framework NUnit 3</tags>
     <dependencies>
-      <dependency id="Ghpr.Core" version="0.9.1.0" />
-      <dependency id="Ghpr.LocalFileSystem" version="0.9.1.0" />
+      <dependency id="Ghpr.Core" version="0.9.1.1" />
+      <dependency id="Ghpr.LocalFileSystem" version="0.9.1.1" />
       <dependency id="NUnit" version="3.10.1" />
       <dependency id="NUnit.Engine" version="3.8.0" />
       <dependency id="Newtonsoft.Json" version="11.0.2" />

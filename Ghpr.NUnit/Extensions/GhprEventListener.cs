@@ -49,11 +49,12 @@ namespace Ghpr.NUnit.Extensions
                 {
                     var testCase = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
                     testCase.GhprTestOutput.TestOutputInfo.Date = eventTime;
-                    Reporter.TestFinished(testCase.GhprTestRun, testCase.GhprTestOutput);
                     foreach (var screenshot in testCase.GhprTestScreenshots)
                     {
-                        Reporter.DataService.SaveScreenshot(screenshot);
+                        var testScreenshotInfo = Reporter.DataService.SaveScreenshot(screenshot);
+                        testCase.GhprTestRun.Screenshots.Add(testScreenshotInfo);
                     }
+                    Reporter.TestFinished(testCase.GhprTestRun, testCase.GhprTestOutput);
                     _testCases.Add(testCase);
                     break;
                 }
