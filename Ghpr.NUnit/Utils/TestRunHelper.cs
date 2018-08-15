@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
