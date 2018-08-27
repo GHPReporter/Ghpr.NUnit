@@ -34,11 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.9.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Ghpr.Core.0.9.1.1\lib\net452\Ghpr.Core.dll</HintPath>
+    <Reference Include="Ghpr.Core, Version=0.9.1.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Ghpr.Core.0.9.1.5\lib\net452\Ghpr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Ghpr.LocalFileSystem.0.9.1.1\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
+    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.1.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Ghpr.LocalFileSystem.0.9.1.5\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.Engine.3.8.0\lib\Mono.Cecil.dll</HintPath>

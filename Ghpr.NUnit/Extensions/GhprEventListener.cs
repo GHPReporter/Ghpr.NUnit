@@ -51,7 +51,7 @@ namespace Ghpr.NUnit.Extensions
                     testCase.GhprTestOutput.TestOutputInfo.Date = eventTime;
                     foreach (var screenshot in testCase.GhprTestScreenshots)
                     {
-                        var testScreenshotInfo = Reporter.DataService.SaveScreenshot(screenshot);
+                        var testScreenshotInfo = Reporter.DataWriterService.SaveScreenshot(screenshot);
                         testCase.GhprTestRun.Screenshots.Add(testScreenshotInfo);
                     }
                     Reporter.TestFinished(testCase.GhprTestRun, testCase.GhprTestOutput);
@@ -73,7 +73,7 @@ namespace Ghpr.NUnit.Extensions
                     foreach (var test in tests)
                     {
                         test.GhprTestOutput.SuiteOutput = testSuite.Output;
-                        Reporter.DataService.UpdateTestOutput(test.GhprTestRun.TestInfo, test.GhprTestOutput);
+                        Reporter.DataWriterService.UpdateTestOutput(test.GhprTestRun.TestInfo, test.GhprTestOutput);
                     }
                     
                     break;
@@ -81,6 +81,7 @@ namespace Ghpr.NUnit.Extensions
                 case "test-run":
                 {
                     Reporter.RunFinished();
+                    Reporter.CleanUpJob();
                     Reporter.TearDown();
                     break;
                 }

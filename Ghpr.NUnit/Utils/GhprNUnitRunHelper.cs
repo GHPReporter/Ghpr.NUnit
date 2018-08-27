@@ -24,10 +24,11 @@ namespace Ghpr.NUnit.Utils
                 {
                     foreach (var screenshot in ghprTestCase.GhprTestScreenshots)
                     {
-                        reporter.DataService.SaveScreenshot(screenshot);
+                        reporter.DataWriterService.SaveScreenshot(screenshot);
                     }
                 }
                 reporter.GenerateFullReport(testRuns.Select(tr => new KeyValuePair<TestRunDto, TestOutputDto>(tr.GhprTestRun, tr.GhprTestOutput)).ToList());
+                reporter.CleanUpJob();
                 reporter.TearDown();
             }
             catch (Exception ex)

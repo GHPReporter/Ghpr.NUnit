@@ -33,11 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.9.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.Core.0.9.1.1\lib\net452\Ghpr.Core.dll</HintPath>
+    <Reference Include="Ghpr.Core, Version=0.9.1.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Ghpr.Core.0.9.1.5\lib\net452\Ghpr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.LocalFileSystem.0.9.1.1\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
+    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.1.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Ghpr.NUnit\packages\Ghpr.LocalFileSystem.0.9.1.5\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
     </Reference>
     <Reference Include="Ghpr.SimpleFileLogger, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Ghpr.NUnit\packages\Ghpr.SimpleFileLogger.0.9.0\lib\net452\Ghpr.SimpleFileLogger.dll</HintPath>
