@@ -5,7 +5,8 @@
     
   before_build:
     - nuget restore Ghpr.NUnit/Ghpr.NUnit.sln
-
+    - nuget restore Ghpr.Core/Ghpr.Core.sln
+  
   build_script: 
     - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
 
