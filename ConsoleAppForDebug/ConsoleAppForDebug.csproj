@@ -32,18 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.9.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.Core.0.9.1.5\lib\net452\Ghpr.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.LocalFileSystem.0.9.1.5\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Ghpr.SerilogToSeqLogger, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.SerilogToSeqLogger.0.9.0\lib\net452\Ghpr.SerilogToSeqLogger.dll</HintPath>
-    </Reference>
-    <Reference Include="Ghpr.SimpleFileLogger, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Ghpr.NUnit\packages\Ghpr.SimpleFileLogger.0.9.0\lib\net452\Ghpr.SimpleFileLogger.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\Ghpr.NUnit\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -91,6 +79,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ghpr.Core\Ghpr.Core\Ghpr.Core.csproj">
+      <Project>{8cde51df-b9d2-4945-a992-35e33decef36}</Project>
+      <Name>Ghpr.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ghpr.Core\Ghpr.LocalFileSystem\Ghpr.LocalFileSystem.csproj">
+      <Project>{40be674c-5954-4aba-b1ed-a890621ad306}</Project>
+      <Name>Ghpr.LocalFileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ghpr.Core\Ghpr.SerilogToSeq\Ghpr.SerilogToSeqLogger.csproj">
+      <Project>{32edf166-49df-4235-a3b9-5877c1e7966c}</Project>
+      <Name>Ghpr.SerilogToSeqLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ghpr.NUnit\Ghpr.NUnit.csproj">
       <Project>{5325be5b-8372-46bc-b7cc-154bd3e9a830}</Project>
       <Name>Ghpr.NUnit</Name>
