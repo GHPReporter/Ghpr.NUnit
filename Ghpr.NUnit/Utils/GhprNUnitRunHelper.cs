@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
@@ -27,7 +26,7 @@ namespace Ghpr.NUnit.Utils
                         reporter.DataWriterService.SaveScreenshot(screenshot);
                     }
                 }
-                reporter.GenerateFullReport(testRuns.Select(tr => new KeyValuePair<TestRunDto, TestOutputDto>(tr.GhprTestRun, tr.GhprTestOutput)).ToList());
+                //reporter.GenerateFullReport(testRuns.Select(tr => new KeyValuePair<TestRunDto, TestOutputDto>(tr.GhprTestRun, tr.GhprTestOutput)).ToList());
                 reporter.CleanUpJob();
                 reporter.TearDown();
             }
@@ -64,7 +63,7 @@ namespace Ghpr.NUnit.Utils
             }
             catch (Exception ex)
             {
-                logger.Exception("Exception in GetTestRunsListFromFile", ex);
+                logger.Exception($"Exception in GetTestRunsListFromFile: {ex.Message}", ex);
                 return null;
             }
         }
