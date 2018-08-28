@@ -190,7 +190,7 @@ namespace Ghpr.NUnit.Utils
                     .Cast<XmlNode>().Select(n => n.InnerText).ToList();
 
                 var testScreenshots = new List<TestScreenshotDto>();
-                foreach (var imageAttachment in imageAttachments)
+                foreach (var imageAttachment in imageAttachments.Where(File.Exists))
                 {
                     var ext = Path.GetExtension(imageAttachment);
                     var fileInfo = new FileInfo(imageAttachment);
@@ -224,7 +224,7 @@ namespace Ghpr.NUnit.Utils
             }
             catch (Exception ex)
             {
-                logger.Exception("Exception in GetTestRun", ex);
+                logger.Exception($"Exception in GetTestRun: {ex.Message}{Environment.NewLine}{ex.StackTrace}", ex);
                 return new GhprTestCase();
             }
         }
