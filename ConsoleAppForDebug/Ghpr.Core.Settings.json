@@ -10,6 +10,6 @@
   "testsToDisplay": "5",
   "retention": {
     "amount": 10,
-    "till": "2018-08-20 10:00:00" 
+    "till": "2018-02-20 10:00:00" 
   }
 }
