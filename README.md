@@ -14,6 +14,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/edl1eag5luk5v4xs?svg=true)](https://ci.appveyor.com/project/elv1s42/ghpr-nunit)
 [![NuGet Version](https://img.shields.io/nuget/v/Ghpr.NUnit.svg)](https://www.nuget.org/packages/Ghpr.NUnit)
 [![CodeFactor](https://www.codefactor.io/repository/github/ghpreporter/ghpr.nunit/badge)](https://www.codefactor.io/repository/github/ghpreporter/ghpr.nunit)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGHPReporter%2FGhpr.NUnit.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGHPReporter%2FGhpr.NUnit?ref=badge_shield)
 
 # Ghpr.NUnit
 
@@ -72,3 +73,7 @@ Anyone contributing is welcome. Write [issues](https://github.com/GHPReporter/Gh
 # Release notes
 
 You can find it [here](https://github.com/GHPReporter/Ghpr.Core/blob/master/RELEASE_NOTES.md) for all packages.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGHPReporter%2FGhpr.NUnit.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FGHPReporter%2FGhpr.NUnit?ref=badge_large)
