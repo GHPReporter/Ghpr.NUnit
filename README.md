@@ -13,6 +13,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/edl1eag5luk5v4xs?svg=true)](https://ci.appveyor.com/project/elv1s42/ghpr-nunit)
 [![NuGet Version](https://img.shields.io/nuget/v/Ghpr.NUnit.svg)](https://www.nuget.org/packages/Ghpr.NUnit)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dcdcf3b7866242fba326fb9aa47871b3)](https://www.codacy.com/app/42_/Ghpr.NUnit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GHPReporter/Ghpr.NUnit&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/ghpreporter/ghpr.nunit/badge)](https://www.codefactor.io/repository/github/ghpreporter/ghpr.nunit)
 
 # Ghpr.NUnit
