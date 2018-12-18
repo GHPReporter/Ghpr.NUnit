@@ -35,11 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Ghpr.Core.0.9.3\lib\net452\Ghpr.Core.dll</HintPath>
+    <Reference Include="Ghpr.Core, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Ghpr.Core.0.9.4\lib\net452\Ghpr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Ghpr.LocalFileSystem.0.9.2\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
+    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Ghpr.LocalFileSystem.0.9.4\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.Engine.3.9.0\lib\Mono.Cecil.dll</HintPath>
@@ -88,7 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Ghpr.Core.Settings.json" />
+    <None Include="Ghpr.Core.Settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Ghpr.NUnit.Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

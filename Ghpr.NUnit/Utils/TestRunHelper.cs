@@ -143,7 +143,7 @@ namespace Ghpr.NUnit.Utils
                 var fullName = testNode.GetAttribute("fullname");
                 var testGuid = GetTestGuid(testNode);
                 var name = testNode.GetAttribute("name");
-                var duration = double.Parse(testNode.GetAttribute("duration") ?? "0.0");
+                var duration = double.Parse(testNode.GetAttribute("duration") ?? "0.0", CultureInfo.InvariantCulture);
                 var id = testNode.GetAttribute("id") ?? "";
                 var parentId = testNode.GetAttribute("parentId") ?? "";
                 if (fullName.Contains(name))
