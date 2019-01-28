@@ -24,8 +24,8 @@ Please use this project with targetFramework v4.5.2
 
  - Install [NUnit 3 console](https://github.com/nunit/nunit-console/releases) latest release
  - Download the latest version of Ghpr.NUnit (using NuGet)
- - Add relative path to `Ghpr.NUnit.dll` from build folder of your tests (example: _addins/../../../Users/Evgeniy_Kosjakov/Documents/GitHub/Ghpr.NUnit.Examples/build/Ghpr.NUnit.dll_) into `nunit.engine.addins` file (file located in *[nunit_console_location]/nunit-console/addins*). Also make sure that your build contains such libraries and files  as `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.LocalFileSystem.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll`:
- ![image](https://user-images.githubusercontent.com/6689884/42174465-21b053a6-7e2b-11e8-8bae-a5cced08812f.png)
+ - Add relative path to `Ghpr.NUnit.dll` from build folder of your tests (example: _addins/../../../Users/Evgeniy_Kosjakov/Documents/GitHub/Ghpr.NUnit.Examples/build/Ghpr.NUnit.dll_) into `nunit.bundle.addins` file (file located in *[nunit_console_location]/addins*). Also make sure that your build contains such libraries and files  as `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.LocalFileSystem.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll`:
+ 
  - Run your tests via NUnit Console
  
 ## How to publish the report in Jenkins
