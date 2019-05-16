@@ -47,6 +47,7 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "test-case":
                 {
+                    Log.Write(report);
                     var testCase = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
                     testCase.GhprTestOutput.TestOutputInfo.Date = eventTime;
                     foreach (var screenshot in testCase.GhprTestScreenshots)
