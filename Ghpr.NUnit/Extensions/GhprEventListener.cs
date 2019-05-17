@@ -15,15 +15,10 @@ namespace Ghpr.NUnit.Extensions
     [Extension(Description = "Ghpr NUnit Extension")]
     public class GhprEventListener : ITestEventListener
     {
-        internal static readonly IReporter Reporter;
+        internal static IReporter Reporter;
         public static string OutputPath => Reporter.ReporterSettings.OutputPath;
         private List<GhprTestCase> _testCases;
         private List<GhprTestSuite> _testSuites;
-
-        static GhprEventListener()
-        {
-            Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider());
-        }
 
         public void OnTestEvent(string report)
         {
@@ -34,6 +29,11 @@ namespace Ghpr.NUnit.Extensions
             {
                 case "start-run":
                 {
+                    var cmd = Environment.CommandLine;
+                    var args = Environment.GetCommandLineArgs();
+                    var projName = args.Length >= 2 ? args[1] : cmd;
+                    Log.Write($"ARGS: {string.Join(", ", args)}");
+                    Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider(), projName);
                     Reporter.RunStarted();
                     _testCases = new List<GhprTestCase>();
                     _testSuites = new List<GhprTestSuite>();
@@ -47,7 +47,6 @@ namespace Ghpr.NUnit.Extensions
                 }
                 case "test-case":
                 {
-                    Log.Write(report);
                     var testCase = TestRunHelper.GetTestRunOnFinished(xmlNode, eventTime, Reporter.Logger);
                     testCase.GhprTestOutput.TestOutputInfo.Date = eventTime;
                     foreach (var screenshot in testCase.GhprTestScreenshots)
