@@ -32,7 +32,6 @@ namespace Ghpr.NUnit.Extensions
                     var cmd = Environment.CommandLine;
                     var args = Environment.GetCommandLineArgs();
                     var projName = args.Length >= 2 ? args[1] : cmd;
-                    Log.Write($"ARGS: {string.Join(", ", args)}");
                     Reporter = ReporterFactory.Build(TestingFramework.NUnit, new TestDataProvider(), projName);
                     Reporter.RunStarted();
                     _testCases = new List<GhprTestCase>();
