@@ -20,13 +20,13 @@
     {
       "pattern": "*CoolTests.dll",
       "settings": {
-        "outputPath": "C:\\_GHPReporter_Core_Report\\CoolTests"
+        "outputPath": "C:\\_GHPReporter_NUnit_Report\\CoolTests"
       }
     },
     {
       "pattern": "*AwesomeTests.dll",
       "settings": {
-        "outputPath": "C:\\_GHPReporter_Core_Report\\AwesomeTests"
+        "outputPath": "C:\\_GHPReporter_NUnit_Report\\AwesomeTests"
       }
     }
   ]
