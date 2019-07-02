@@ -4,8 +4,8 @@
     - nuget
     
   before_build:
-    - nuget restore Ghpr.NUnit/Ghpr.NUnit.sln
-    - nuget restore Ghpr.Core/Ghpr.Core.sln
+    - dotnet restore Ghpr.NUnit/Ghpr.NUnit.sln
+    - dotnet restore Ghpr.Core/Ghpr.Core.sln
 
   clone_script:
   - cmd: >-
@@ -15,13 +15,13 @@
       && git submodule update --init --recursive
       
   build_script: 
-    - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
+    - dotnet build Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
 
   after_build:
-    - nuget pack "Ghpr.NUnit/Ghpr.NUnit.csproj" -Prop Configuration=Release
+    - dotnet pack -c Release "Ghpr.NUnit/Ghpr.NUnit.csproj" /p:NuspecFile="Ghpr.NUnit.nuspec"
 
   artifacts:
-    - path: '*.nupkg'
+    - path: '**\*.nupkg'
       name: nupkg
 
   deploy:
@@ -46,8 +46,8 @@
     - nuget
     
   before_build:
-    - nuget restore Ghpr.NUnit/Ghpr.NUnit.sln
-    - nuget restore Ghpr.Core/Ghpr.Core.sln
+    - dotnet restore Ghpr.NUnit/Ghpr.NUnit.sln
+    - dotnet restore Ghpr.Core/Ghpr.Core.sln
 
   clone_script:
   - cmd: >-
@@ -57,7 +57,7 @@
       && git submodule update --init --recursive
 
   build_script: 
-    - msbuild Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
+    - dotnet build Ghpr.NUnit/Ghpr.NUnit.sln /p:Configuration=Release /t:Rebuild
 
   test:
     assemblies:
