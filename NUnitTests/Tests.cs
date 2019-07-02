@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Drawing;
+//using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using Ghpr.NUnit.Utils;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -69,14 +69,15 @@ namespace NUnitTests
 
         public static byte[] TakeScreen()
         {
-            var b = Screen.PrimaryScreen.Bounds;
-            var ic = new ImageConverter();
-            using (var btm = new Bitmap(b.Width, b.Height))
-            using (var g = Graphics.FromImage(btm))
-            {
-                g.CopyFromScreen(b.X, b.Y, 0, 0, btm.Size, CopyPixelOperation.SourceCopy);
-                return (byte[])ic.ConvertTo(btm, typeof(byte[]));
-            }
+            //var b = Screen.PrimaryScreen.Bounds;
+            //var ic = new ImageConverter();
+            //using (var btm = new Bitmap(b.Width, b.Height))
+            //using (var g = Graphics.FromImage(btm))
+            //{
+            //    g.CopyFromScreen(b.X, b.Y, 0, 0, btm.Size, CopyPixelOperation.SourceCopy);
+            //    return (byte[])ic.ConvertTo(btm, typeof(byte[]));
+            //}
+            return null;
         }
 
         public static string SaveScreen(byte[] screen, string fileName)
