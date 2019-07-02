@@ -79,17 +79,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ghpr.Core\Ghpr.Core\Ghpr.Core.csproj">
-      <Project>{8cde51df-b9d2-4945-a992-35e33decef36}</Project>
+    <ProjectReference Include="..\Ghpr.Core\Ghpr.Core.Core\Ghpr.Core.csproj">
+      <Project>{85b6a9c9-294b-4ddf-8e3e-f1cbacf0bf5f}</Project>
       <Name>Ghpr.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ghpr.Core\Ghpr.LocalFileSystem\Ghpr.LocalFileSystem.csproj">
-      <Project>{40be674c-5954-4aba-b1ed-a890621ad306}</Project>
+    <ProjectReference Include="..\Ghpr.Core\Ghpr.LocalFileSystem.Core\Ghpr.LocalFileSystem.csproj">
+      <Project>{67618731-87f4-436c-b616-19ac504fa995}</Project>
       <Name>Ghpr.LocalFileSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ghpr.Core\Ghpr.SerilogToSeq\Ghpr.SerilogToSeqLogger.csproj">
-      <Project>{32edf166-49df-4235-a3b9-5877c1e7966c}</Project>
-      <Name>Ghpr.SerilogToSeqLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ghpr.NUnit\Ghpr.NUnit.csproj">
       <Project>{5325be5b-8372-46bc-b7cc-154bd3e9a830}</Project>

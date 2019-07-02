@@ -9,11 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppForDebug", "..\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTests", "..\NUnitTests\NUnitTests.csproj", "{BC4C21D7-BCE7-4539-95BA-55760D144693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghpr.Core", "..\Ghpr.Core\Ghpr.Core\Ghpr.Core.csproj", "{8CDE51DF-B9D2-4945-A992-35E33DECEF36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ghpr.Core", "..\Ghpr.Core\Ghpr.Core.Core\Ghpr.Core.csproj", "{85B6A9C9-294B-4DDF-8E3E-F1CBACF0BF5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghpr.LocalFileSystem", "..\Ghpr.Core\Ghpr.LocalFileSystem\Ghpr.LocalFileSystem.csproj", "{40BE674C-5954-4ABA-B1ED-A890621AD306}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghpr.SerilogToSeqLogger", "..\Ghpr.Core\Ghpr.SerilogToSeq\Ghpr.SerilogToSeqLogger.csproj", "{32EDF166-49DF-4235-A3B9-5877C1E7966C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ghpr.LocalFileSystem", "..\Ghpr.Core\Ghpr.LocalFileSystem.Core\Ghpr.LocalFileSystem.csproj", "{67618731-87F4-436C-B616-19AC504FA995}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +31,14 @@ Global
 		{BC4C21D7-BCE7-4539-95BA-55760D144693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC4C21D7-BCE7-4539-95BA-55760D144693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC4C21D7-BCE7-4539-95BA-55760D144693}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CDE51DF-B9D2-4945-A992-35E33DECEF36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CDE51DF-B9D2-4945-A992-35E33DECEF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CDE51DF-B9D2-4945-A992-35E33DECEF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CDE51DF-B9D2-4945-A992-35E33DECEF36}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40BE674C-5954-4ABA-B1ED-A890621AD306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40BE674C-5954-4ABA-B1ED-A890621AD306}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40BE674C-5954-4ABA-B1ED-A890621AD306}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40BE674C-5954-4ABA-B1ED-A890621AD306}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32EDF166-49DF-4235-A3B9-5877C1E7966C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32EDF166-49DF-4235-A3B9-5877C1E7966C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32EDF166-49DF-4235-A3B9-5877C1E7966C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32EDF166-49DF-4235-A3B9-5877C1E7966C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85B6A9C9-294B-4DDF-8E3E-F1CBACF0BF5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85B6A9C9-294B-4DDF-8E3E-F1CBACF0BF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85B6A9C9-294B-4DDF-8E3E-F1CBACF0BF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85B6A9C9-294B-4DDF-8E3E-F1CBACF0BF5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67618731-87F4-436C-B616-19AC504FA995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67618731-87F4-436C-B616-19AC504FA995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67618731-87F4-436C-B616-19AC504FA995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67618731-87F4-436C-B616-19AC504FA995}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
