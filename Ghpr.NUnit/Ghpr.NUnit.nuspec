@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>Ghpr.NUnit</id>
+    <version>0.9.9.1</version>
+    <title>Ghpr.NUnit</title>
+    <authors>Evgeniy Kosjakov</authors>
+    <owners>Evgeniy Kosjakov</owners>
     <licenseUrl>https://github.com/GHPReporter/Ghpr.NUnit/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/GHPReporter/Ghpr.NUnit</projectUrl>
     <iconUrl>https://github.com/GHPReporter/GHPReporter.github.io/blob/master/img/logo-small.png?raw=true</iconUrl>
@@ -15,8 +15,8 @@
     <copyright>Copyright Evgeniy Kosjakov © 2016-2019</copyright>
     <tags>.NET QA package HTML report reporting testing tool framework NUnit 3</tags>
     <dependencies>
-      <dependency id="Ghpr.Core" version="0.9.9.0" />
-      <dependency id="Ghpr.LocalFileSystem" version="0.9.9.0" />
+      <dependency id="Ghpr.Core" version="0.9.9.1" />
+      <dependency id="Ghpr.LocalFileSystem" version="0.9.9.1" />
       <dependency id="NUnit" version="3.12.0" />
       <dependency id="NUnit.Engine" version="3.10.0" />
       <dependency id="Newtonsoft.Json" version="12.0.2" />
