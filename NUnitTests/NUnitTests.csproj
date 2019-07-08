@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
     <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp2.0;net472</TargetFrameworks>
     <AssemblyName>NUnitTests</AssemblyName>
     <RootNamespace>NUnitTests</RootNamespace>
     <DebugType>Full</DebugType>
@@ -10,7 +10,13 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   
+    <ItemGroup>
+      <None Remove="Ghpr.NUnit.Settings.json" />
+      <None Remove="Ghpr.SimpleFileLogger.Settings.json" />
+    </ItemGroup>
+  
   <ItemGroup>
+    <PackageReference Include="Ghpr.SimpleFileLogger" Version="0.9.9.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Ghpr.Core" Version="0.9.9.1" />
@@ -23,6 +29,12 @@
   
   <ItemGroup>
     <Content Include="Ghpr.Core.Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ghpr.NUnit.Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ghpr.SimpleFileLogger.Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
