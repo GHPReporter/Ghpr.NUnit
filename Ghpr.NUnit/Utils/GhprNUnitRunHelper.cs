@@ -7,6 +7,7 @@ using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
 using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
+using Ghpr.Core.Providers;
 using Ghpr.NUnit.Common;
 
 namespace Ghpr.NUnit.Utils
@@ -57,6 +58,8 @@ namespace Ghpr.NUnit.Utils
                         var test = list.FirstOrDefault(t => t.GhprTestRun.TestInfo.Guid == output.Key.Guid
                                                             && t.GhprTestRun.TestInfo.Finish == output.Key.Finish) ?? new GhprTestCase();
                         test.GhprTestOutput.Output = output.Value.Output;
+                        test.GhprTestOutput.TestOutputInfo.ItemName =
+                            NamesProvider.GetTestOutputFileName(test.GhprTestRun.TestInfo.Finish);
                         test.GhprTestOutput.SuiteOutput = output.Value.SuiteOutput;
                     }
                 }

@@ -7,6 +7,7 @@ using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
 using Ghpr.Core.Interfaces;
+using Ghpr.Core.Providers;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Common;
 using NUnit;
@@ -43,7 +44,8 @@ namespace Ghpr.NUnit.Utils
                 Output = testNode.SelectSingleNode("./output")?.InnerText ?? "",
                 TestOutputInfo = new SimpleItemInfoDto
                 {
-                    Date = testFinishDate
+                    Date = testFinishDate,
+                    ItemName = NamesProvider.GetTestOutputFileName(testFinishDate)
                 }
             };
             return output;
