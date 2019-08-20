@@ -32,7 +32,7 @@
 
  - Check you have the [latest NuGet package installed](https://www.nuget.org/packages/NUnit.ConsoleRunner/)
  - Download the latest version of Ghpr.NUnit (using NuGet)
- - Add relative path to `Ghpr.NUnit.dll` into `nunit.nuget.addins` in tools directory of NUnit.ConsoleRunner.3.10.0. Also make sure that your build contains such libraries and files  as `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.LocalFileSystem.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll`.
+ - Add relative path to `Ghpr.NUnit.dll` located in your build folder into `nunit.nuget.addins` in tools directory of NUnit.ConsoleRunner.3.10.0. Also make sure that your build contains such libraries and files  as `Ghpr.Core.dll`, `Ghpr.NUnit.dll`, `Ghpr.LocalFileSystem.dll`, `Ghpr.NUnit.Settings.json` and `Newtonsoft.Json.dll`.
  - Run your tests via NUnit Console Runner
  
 ## How to publish the report in Jenkins
