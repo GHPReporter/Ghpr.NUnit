@@ -250,3 +250,7 @@ Ghpr.NUnit/.vs/Ghpr.NUnit/v15/sqlite3/db.lock
 Ghpr.NUnit/.vs/Ghpr.NUnit/v15/sqlite3/storage.ide-shm
 Ghpr.NUnit/.vs/Ghpr.NUnit/v15/sqlite3/storage.ide-wal
 Ghpr.NUnit/.vs/Ghpr.NUnit/DesignTimeBuild/.dtbcache
+Ghpr.NUnit/.vs/Ghpr.NUnit/v16/Server/sqlite3/db.lock
+Ghpr.NUnit/.vs/Ghpr.NUnit/v16/Server/sqlite3/storage.ide
+*.ide-shm
+*.ide-wal
