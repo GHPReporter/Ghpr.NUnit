@@ -19,6 +19,17 @@ namespace NUnitTests
             }
         }
 
+        [Test(Description = "This is example of saving screenshots using NUnit context")]
+        [Category("Screenshots")]
+        public void TestMethod1()
+        {
+            Console.WriteLine("Taking screen...");
+            var bytes = TakeScreen();
+            var fullPath1 = SaveScreen(bytes, Guid.NewGuid() + ".png");
+            TestContext.AddTestAttachment(fullPath1);
+            Console.WriteLine("Done.");
+        }
+
         [Test(Description = "This is example of taking screenshots inside test")]
         [Category("Screenshots")]
         public void TestMethodFailed()
