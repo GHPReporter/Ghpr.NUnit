@@ -2,7 +2,9 @@
   branches:
     only:
     - nuget
-    
+
+  image: Visual Studio 2019
+
   before_build:
     - dotnet restore Ghpr.NUnit/Ghpr.NUnit.sln
     - dotnet restore Ghpr.Core/Ghpr.Core.sln
@@ -44,7 +46,9 @@
   branches:
     except:
     - nuget
-    
+
+  image: Visual Studio 2019
+
   before_build:
     - dotnet restore Ghpr.NUnit/Ghpr.NUnit.sln
     - dotnet restore Ghpr.Core/Ghpr.Core.sln
