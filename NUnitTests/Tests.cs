@@ -15,19 +15,18 @@ namespace NUnitTests
             var res = TestContext.CurrentContext.Result.Outcome;
             if (res.Equals(ResultState.Failure) || res.Equals(ResultState.Error))
             {
-                ScreenHelper.SaveScreenshot(TakeScreen());
+                //ScreenHelper.SaveScreenshot(TakeScreen());
+                var bytes = TakeScreen();
+                var fullPath = SaveScreen(bytes, Guid.NewGuid() + ".png");
+                TestContext.AddTestAttachment(fullPath);
             }
         }
 
-        [Test(Description = "This is example of saving screenshots using NUnit context")]
+        [Test(Description = "This is a failed test")]
         [Category("Screenshots")]
         public void TestMethod1()
         {
-            Console.WriteLine("Taking screen...");
-            var bytes = TakeScreen();
-            var fullPath1 = SaveScreen(bytes, Guid.NewGuid() + ".png");
-            TestContext.AddTestAttachment(fullPath1);
-            Console.WriteLine("Done.");
+            Assert.Fail("Failed to see how screenshot is taken");
         }
 
         [Test(Description = "This is example of taking screenshots inside test")]
