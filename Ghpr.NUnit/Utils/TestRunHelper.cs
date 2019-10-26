@@ -10,6 +10,7 @@ using Ghpr.Core.Interfaces;
 using Ghpr.Core.Providers;
 using Ghpr.Core.Utils;
 using Ghpr.NUnit.Common;
+using Ghpr.NUnit.Extensions;
 using NUnit;
 
 namespace Ghpr.NUnit.Utils
@@ -187,10 +188,9 @@ namespace Ghpr.NUnit.Utils
                     TestData = testData ?? new List<TestDataDto>()
                 };
 
-                var imageAttachments = testNode.SelectNodes(
-                        ".//attachments/attachment/filePath[contains(.,'.png') or contains(.,'.jpeg') or contains(.,'.bmp')]")?
-                    .Cast<XmlNode>().Select(n => n.InnerText).ToList();
-
+                var imageAttachments = testNode.SelectNodes(".//attachments/attachment/filePath")?
+                    .Cast<XmlNode>().Select(n => n.InnerText).Where(t => t.EndsWithImgExtension()).ToList();
+                
                 var testScreenshots = new List<TestScreenshotDto>();
                 foreach (var imageAttachment in imageAttachments.Where(File.Exists))
                 {
@@ -211,8 +211,9 @@ namespace Ghpr.NUnit.Utils
                         Base64Data = base64
                     };
                     testScreenshots.Add(testScreenshotDto);
+                    test.Screenshots.Add(screenInfo);
                 }
-
+                
                 var ghprTestCase = new GhprTestCase
                 {
                     Id = id,
