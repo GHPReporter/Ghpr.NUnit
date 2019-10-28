@@ -102,7 +102,7 @@ namespace Ghpr.NUnit.Utils
         {
             try
             {
-                var now = DateTime.Now;
+                var now = DateTime.UtcNow;
                 var testType = testNode.SelectSingleNode("properties/property[@name='TestType']")?.GetAttribute("value");
                 var priority = testNode.SelectSingleNode("properties/property[@name='Priority']")?.GetAttribute("value");
                 var description = testNode.SelectSingleNode("properties/property[@name='Description']")?.GetAttribute("value");
@@ -200,7 +200,7 @@ namespace Ghpr.NUnit.Utils
                     var base64 = Convert.ToBase64String(bytes);
                     var screenInfo = new SimpleItemInfoDto
                     {
-                        Date = fileInfo.CreationTime,
+                        Date = fileInfo.CreationTimeUtc,
                         ItemName = ""
                     };
                     var testScreenshotDto = new TestScreenshotDto
