@@ -22,7 +22,7 @@ namespace Ghpr.NUnit.Extensions
 
         public void OnTestEvent(string report)
         {
-            var eventTime = DateTime.Now;
+            var eventTime = DateTime.UtcNow;
             var xmlNode = XmlHelper.CreateXmlNode(report);
 
             switch (xmlNode.Name)

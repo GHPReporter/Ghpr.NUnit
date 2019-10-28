@@ -25,7 +25,7 @@ namespace Ghpr.NUnit.Utils
                 commentKey = Paths.GetTestDataCommentKey(count);
             }
 
-            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(dateTimeKey, DateTime.Now.ToString("yyyyMMdd_HHmmssfff"));
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(dateTimeKey, DateTime.UtcNow.ToString("yyyyMMdd_HHmmssfff"));
             TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(actualKey, actual);
             TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(expectedKey, expected);
             TestExecutionContext.CurrentContext.CurrentTest.Properties.Add(commentKey, comment);

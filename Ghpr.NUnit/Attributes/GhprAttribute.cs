@@ -28,7 +28,7 @@ namespace Ghpr.NUnit.Attributes
             }
             if (!nunitTest.IsSuite)
             {
-                var ghprTest = TestRunHelper.GetTestRunOnStarted(GetTestNode(nunitTest), DateTime.Now, Reporter.Logger);
+                var ghprTest = TestRunHelper.GetTestRunOnStarted(GetTestNode(nunitTest), DateTime.UtcNow, Reporter.Logger);
                 Reporter.TestFinished(ghprTest.GhprTestRun, ghprTest.GhprTestOutput);
             }
         }
@@ -37,7 +37,7 @@ namespace Ghpr.NUnit.Attributes
         {
             if (!nunitTest.IsSuite)
             {
-                var ghprTest = TestRunHelper.GetTestRunOnFinished(GetTestNode(nunitTest), DateTime.Now, Reporter.Logger);
+                var ghprTest = TestRunHelper.GetTestRunOnFinished(GetTestNode(nunitTest), DateTime.UtcNow, Reporter.Logger);
                 Reporter.TestFinished(ghprTest.GhprTestRun, ghprTest.GhprTestOutput);
             }
         }

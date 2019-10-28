@@ -15,7 +15,7 @@ namespace Ghpr.NUnit.Utils
             {
                 try
                 {
-                    var logLine = $"{DateTime.Now:G}: {msg}";
+                    var logLine = $"{DateTime.UtcNow:G}: {msg}";
                     sw.WriteLine(logLine);
                 }
                 finally
@@ -32,7 +32,7 @@ namespace Ghpr.NUnit.Utils
             {
                 try
                 {
-                    var logLine = $"{DateTime.Now:G}: {msg}";
+                    var logLine = $"{DateTime.UtcNow:G}: {msg}";
                     sw.WriteLine(logLine);
                 }
                 catch (Exception ex)
@@ -59,12 +59,12 @@ namespace Ghpr.NUnit.Utils
                 "StackTrace: " + Environment.NewLine + inner.StackTrace;
                 inner = inner.InnerException;
             }
-            WriteToFile(msg, "Exception_" + DateTime.Now.ToString("ddMMyyHHmmssfff") + ".txt");
+            WriteToFile(msg, "Exception_" + DateTime.UtcNow.ToString("ddMMyyHHmmssfff") + ".txt");
         }
         
         public static void Warning(string warningMessage)
         {
-            WriteToFile(warningMessage, "Warning_" + DateTime.Now.ToString("ddMMyyHHmmssfff") + ".txt");
+            WriteToFile(warningMessage, "Warning_" + DateTime.UtcNow.ToString("ddMMyyHHmmssfff") + ".txt");
         }
     }
 }
