@@ -23,7 +23,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Ghpr.Core" Version="0.9.9.9" />
     <PackageReference Include="Ghpr.LocalFileSystem" Version="0.9.9.9" />
     <PackageReference Include="NUnit" Version="3.12.0" />
