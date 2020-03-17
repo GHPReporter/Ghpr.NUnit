@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>NUnit.Extension.Ghpr</id>
+    <version>0.0.1</version>
+    <title>NUnit.Extension.Ghpr</title>
+    <authors>Evgeniy Kosjakov</authors>
+    <owners>Evgeniy Kosjakov</owners>
+    <licenseUrl>https://github.com/GHPReporter/Ghpr.NUnit/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/GHPReporter/Ghpr.NUnit</projectUrl>
+    <iconUrl>https://github.com/GHPReporter/GHPReporter.github.io/blob/master/img/logo-small.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Easy-to-use test run reporter for NUnit 3 (NUnit Addin) for .NET Core</description>
+    <releaseNotes>https://github.com/GHPReporter/Ghpr.Core/blob/master/RELEASE_NOTES.md</releaseNotes>
+    <copyright>Copyright Evgeniy Kosjakov © 2016-2019</copyright>
+    <tags>.NET QA package HTML report reporting testing tool framework NUnit 3 .NET Core</tags>
+    <dependencies>
+      <dependency id="Ghpr.Core" version="0.9.10" />
+      <dependency id="Ghpr.LocalFileSystem" version="0.9.10" />
+      <dependency id="NUnit" version="3.12.0" />
+      <dependency id="NUnit.Engine" version="3.10.0" />
+      <dependency id="Newtonsoft.Json" version="12.0.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src=".\bin\Release\*" target="tools\*" />
+    <file src=".\bin\Release\net45\Ghpr.NUnit.Settings.json" target="content" />
+  </files>
+</package>
