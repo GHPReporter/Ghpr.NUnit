@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>NUnit.Extension.Ghpr</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>NUnit.Extension.Ghpr</title>
     <authors>Evgeniy Kosjakov</authors>
     <owners>Evgeniy Kosjakov</owners>
@@ -23,7 +23,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src=".\bin\Release\*" target="tools" />
+    <file src=".\bin\Release\**" target="tools" />
     <file src=".\bin\Release\net45\Ghpr.NUnit.Settings.json" target="content" />
   </files>
 </package>
