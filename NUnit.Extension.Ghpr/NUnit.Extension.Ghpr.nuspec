@@ -23,7 +23,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src=".\bin\Release\*" target="tools\*" />
+    <file src=".\bin\Release\*" target="tools" />
     <file src=".\bin\Release\net45\Ghpr.NUnit.Settings.json" target="content" />
   </files>
 </package>
