@@ -21,17 +21,24 @@
     <Description>Easy-to-use test run reporter for NUnit 3 (NUnit Console Addin)</Description>
     <PackageTags>.NET QA package HTML report reporting testing tool framework NUnit 3 DotNet</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Ghpr.NUnit.addins" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Ghpr.Core" Version="0.9.10" />
     <PackageReference Include="Ghpr.LocalFileSystem" Version="0.9.10" />
     <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="nunit.engine" Version="3.10.0.0" />
+    <PackageReference Include="nunit.engine" Version="3.11.1" />
   </ItemGroup>
   
   <ItemGroup>
     <Content Include="Ghpr.Core.Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ghpr.NUnit.addins">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
