@@ -21,7 +21,6 @@
 
   after_build:
     - dotnet pack -c Release "Ghpr.NUnit/Ghpr.NUnit.csproj" /p:NuspecFile="Ghpr.NUnit.nuspec"
-    - dotnet pack -c Release "NUnit.Extension.Ghpr/NUnit.Extension.Ghpr.csproj" /p:NuspecFile="NUnit.Extension.Ghpr.nuspec"
 
   artifacts:
     - path: '**\*.nupkg'
