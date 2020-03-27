@@ -95,7 +95,7 @@ namespace Ghpr.NUnit.Utils
 
         private static Guid GetTestGuid(XmlNode testNode)
         {
-            var guid = testNode.SelectSingleNode("properties/property[@name='TestGuid']")?.GetAttribute("value");
+            var guid = testNode.SelectSingleNode("properties/property[@name='TestGuid']")?.Val();
             return guid != null ? Guid.Parse(guid) : testNode.GetAttribute("fullname").ToMd5HashGuid();
         }
 
@@ -104,28 +104,28 @@ namespace Ghpr.NUnit.Utils
             try
             {
                 var now = DateTime.UtcNow;
-                var testType = testNode.SelectSingleNode("properties/property[@name='TestType']")?.GetAttribute("value");
-                var priority = testNode.SelectSingleNode("properties/property[@name='Priority']")?.GetAttribute("value");
-                var description = testNode.SelectSingleNode("properties/property[@name='Description']")?.GetAttribute("value");
+                var testType = testNode.SelectSingleNode("properties/property[@name='TestType']")?.Val();
+                var priority = testNode.SelectSingleNode("properties/property[@name='Priority']")?.Val();
+                var description = testNode.SelectSingleNode("properties/property[@name='Description']")?.Val();
                 var categories = testNode.SelectNodes("properties/property[@name='Category']")?.Cast<XmlNode>()
-                    .Select(n => n.GetAttribute("value")).ToArray();
+                    .Select(n => n.Val()).ToArray();
 
                 var testDataDateTimes = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{Paths.Names.TestDataDateTimeKeyTemplate}')]")?
                     .Cast<XmlNode>()
-                    .Select(n => n.GetAttribute("value")).ToList();
+                    .Select(n => n.Val()).ToList();
                 var testDataActuals = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{Paths.Names.TestDataActualKeyTemplate}')]")?
                     .Cast<XmlNode>()
-                    .Select(n => n.GetAttribute("value")).ToArray();
+                    .Select(n => n.Val()).ToArray();
                 var testDataExpecteds = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{Paths.Names.TestDataExpectedKeyTemplate}')]")?
                     .Cast<XmlNode>()
-                    .Select(n => n.GetAttribute("value")).ToArray();
+                    .Select(n => n.Val()).ToArray();
                 var testDataComments = testNode.SelectNodes(
                         $"properties/property[contains(@name,'{Paths.Names.TestDataCommentKeyTemplate}')]")?
                     .Cast<XmlNode>()
-                    .Select(n => n.GetAttribute("value")).ToArray();
+                    .Select(n => n.Val()).ToArray();
                 var testData = new List<TestDataDto>();
                 for (var i = 0; i < testDataDateTimes?.Count; i++)
                 {
