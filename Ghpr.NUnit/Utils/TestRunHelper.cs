@@ -211,7 +211,7 @@ namespace Ghpr.NUnit.Utils
                         Base64Data = base64
                     };
                     testScreenshots.Add(testScreenshotDto);
-                    test.Screenshots.Add(screenInfo);
+                    test.Screenshots.Add(testScreenshotDto.TestScreenshotInfo);
                 }
                 
                 var ghprTestCase = new GhprTestCase

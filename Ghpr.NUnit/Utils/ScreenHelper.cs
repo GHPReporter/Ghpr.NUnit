@@ -6,6 +6,7 @@ namespace Ghpr.NUnit.Utils
 {
     public static class ScreenHelper
     {
+        [Obsolete("Please use NUnit method: TestContext.AddTestAttachment()")]
         public static void SaveScreenshot(byte[] screenshotBytes, string format = "png")
         {
             var wd = TestContext.CurrentContext.WorkDirectory;

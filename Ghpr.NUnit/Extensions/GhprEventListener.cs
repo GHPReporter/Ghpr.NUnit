@@ -51,7 +51,10 @@ namespace Ghpr.NUnit.Extensions
                     foreach (var screenshot in testCase.GhprTestScreenshots)
                     {
                         var testScreenshotInfo = Reporter.DataWriterService.SaveScreenshot(screenshot);
-                        testCase.GhprTestRun.Screenshots.Add(testScreenshotInfo);
+                        if (testCase.GhprTestRun.Screenshots.All(s => s.Date != screenshot.TestScreenshotInfo.Date))
+                        {
+                            testCase.GhprTestRun.Screenshots.Add(testScreenshotInfo);
+                        }
                     }
                     Reporter.TestFinished(testCase.GhprTestRun, testCase.GhprTestOutput);
                     _testCases.Add(testCase);
