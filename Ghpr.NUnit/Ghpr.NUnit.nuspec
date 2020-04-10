@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package>
   <metadata>
     <id>Ghpr.NUnit</id>
-    <version>0.9.11</version>
+    <version>0.9.12</version>
     <title>Ghpr.NUnit</title>
     <authors>Evgeniy Kosjakov</authors>
     <owners>Evgeniy Kosjakov</owners>
@@ -15,7 +15,7 @@
     <copyright>Copyright Evgeniy Kosjakov © 2016-2020</copyright>
     <tags>.NET QA package HTML report reporting testing tool framework NUnit 3 Framework Core</tags>
     <dependencies>
-      <dependency id="Ghpr.Core" version="0.9.10" />
+      <dependency id="Ghpr.Core" version="0.9.12" />
       <dependency id="Ghpr.LocalFileSystem" version="0.9.10" />
       <dependency id="NUnit" version="3.12.0" />
       <dependency id="NUnit.Engine" version="3.11.1" />
